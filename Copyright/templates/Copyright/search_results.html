@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'Copyright/styles/search_results.css' %}">
+{% endblock css_files %}
+
+{% block page_title %}
+    Search Results - {{ query }}
+{% endblock page_title %}
+
+{% block content %}
+    <div class="search-results-block">
+        <h1>Copyright</h1>
+        <hr>
+        <h1>Results</h1>
+
+        <form class="d-flex align-items-start" method="get" action="{% url 'search-copyright' %}">
+            <input name="search_query" id="searchbar" type="text" placeholder="Search...">
+            <div>
+                <input class="btn btn-primary search-button" type="submit" value="Search">
+                <a class="btn btn-secondary" href="{% url 'copyright-home' %}">Return</a>
+            </div>
+            
+        </form>
+        
+        <h5>Results for <b>"{{ query }}"</b></h5>
+
+        {% if copyrights %}
+
+            {% for copyright in copyrights %}
+                <div class="search-result">
+                    <h4><a href="{{ copyright.copyright_slug }}">{{ copyright.copyright_application_name }}</a></h4>
+                    <h6>Date Added: {{ copyright.date_added }}</h6>
+                    <h6>Date Modified: {{ copyright.date_modified }}</h6>
+                    <p>{{ copyright.remarks|truncatechars:300 }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3>None Found</h3>
+        {% endif %}
+    </div>
+        
+{% endblock content %}

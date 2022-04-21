@@ -1,0 +1,63 @@
+.page-header,
+.page-header:hover{
+    text-decoration: none !important;
+    color: black;
+}
+
+.name-block{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.name-block h6{
+    font-style: italic;
+    color: rgb(179, 179, 179);
+}
+
+.files-table{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+table th{
+    font-weight: strong;
+    text-align: left;
+}
+
+.file-type{
+    font-weight: bold;
+    word-wrap: break-word;
+    min-width: 200px;
+    max-width: 200px;
+    text-align: left !important;
+}
+
+tbody tr{
+    border-bottom: solid 2px rgb(236, 236, 236) !important;
+}
+
+tbody tr:last-of-type{
+    border-bottom: none !important;
+}
+
+tbody td{
+    text-align: left;
+}
+
+tbody td a{
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.no-file{
+    text-align: left;
+    color: rgb(172, 172, 172);
+}

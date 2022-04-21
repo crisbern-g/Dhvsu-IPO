@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'Copyright/styles/delete_whole.css' %}">
+{% endblock css_files %}
+
+{% block content %}
+    <form class="form-block" action="{% url 'delete-whole' copyright.copyright_slug %}" method="POST" enctype="multipart/form-data" autocomplete="off">
+        {% csrf_token %}
+
+        <h1>WARNING</h1>
+        
+        <p>
+            You are about to delete a copyright entry named <b>{{ copyright.copyright_application_name }}</b>. Associated files to this entry are as follows:
+        </p>
+
+        <ul>
+            {% if file.application_file.application_file.name %}
+                <li><b>{{ file.application_file.application_file.name|file_name }}</li></b>
+            {% endif %}
+            
+            {% if file.deed_of_assignment.deed_of_assignment_file.name %}
+                <li><b>{{ file.deed_of_assignment.deed_of_assignment_file.name|file_name }}</li></b>
+            {% endif %}
+            
+            {% if file.electronic_copy.electronic_copy_file.name %}
+                <li><b>{{ file.electronic_copy.electronic_copy_file.name|file_name }}</li></b>
+            {% endif %}
+            
+            {% if file.author_ids.author_ids_file.name %}
+                <li><b>{{ file.author_ids.author_ids_file.name|file_name }}</li></b>
+            {% endif %}
+            
+            {% if file.memorandum_of_appointment.memorandum_of_appointment_file.name %}
+                <li><b>{{ file.memorandum_of_appointment.memorandum_of_appointment_file.name|file_name }}</li></b>
+            {% endif %}
+            
+            {% if file.certificate_of_registration.certificate_of_registration_file.name %}
+                <li><b>{{ file.certificate_of_registration.certificate_of_registration_file.name|file_name }}</li></b>
+            {% endif %}
+           
+        </ul>
+
+        <p>
+            By deleting this entry, the associated files will also be deleted. This process <b>CANNOT</b> be reversed. Please make sure that appropriate actions were taken before proceeding.
+        </p>
+
+        <div class="d-flex">
+            <input class='btn btn-danger action-button' type="submit" value="Delete">
+            <a class="btn btn-secondary action-button" href="{% url 'copyright-detail' copyright.copyright_slug %}">Go Back</a>
+        </div>
+    </form>
+{% endblock content %}

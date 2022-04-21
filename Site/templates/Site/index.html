@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    Home
+{% endblock page_title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'Site/styles/index.css' %}">
+{% endblock css_files %}
+
+{% block content %}
+    <div class="row row-cols-xl-2 row-cols-sm-1">
+        {% comment %} Copyright {% endcomment %}
+        <div class="col">
+            <div class="card ip-card" onclick="window.location='{% url 'copyright-home' %}'">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+
+                <div class="card-footer-custom">
+                    <h3>Copyright</h3>
+                </div>
+
+            </div>
+        </div>
+
+        {% comment %} Patent {% endcomment %}
+        <div class="col">
+            <div class="card ip-card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+
+                <div class="card-footer-custom">
+                    <h3>Patent</h3>
+                </div>
+
+            </div>
+        </div>
+
+        {% comment %} Industrial Design {% endcomment %}
+        <div class="col">
+            <div class="card ip-card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+
+                <div class="card-footer-custom">
+                    <h3>Industrial Design</h3>
+                </div>
+
+            </div>
+        </div>
+
+        {% comment %} Utility Model {% endcomment %}
+        <div class="col">
+            <div class="card ip-card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+
+                <div class="card-footer-custom">
+                    <h3>Utility Model</h3>
+                </div>
+
+            </div>
+        </div>
+
+        {% comment %} Trademark {% endcomment %}
+        <div class="col">
+            <div class="card ip-card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+
+                <div class="card-footer-custom">
+                    <h3>Trademark</h3>
+                </div>
+
+            </div>
+        </div>
+
+        {% comment %} ISSN {% endcomment %}
+        <div class="col">
+            <div class="card ip-card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+
+                <div class="card-footer-custom">
+                    <h3>ISSN</h3>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

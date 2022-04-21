@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'Copyright/styles/edit_file.css' %}">
+{% endblock css_files %}
+
+{% block page_title %}
+    Edit File
+{% endblock page_title %}
+
+{% block content %}
+    <h1><a class="page-header" href="{% url 'copyright-home' %}">Copyright</a></h1>
+
+    <div class="d-flex justify-content-between align-items-center name-block">
+        <h2>{{ copyright.copyright_application_name }}</h2>
+        <h6>Date Added: {{ copyright.date_added }}</h6>
+        <h6>Date Modified: {{ copyright.date_modified }}</h6>
+    </div>
+
+    <form class="form-block" action="{% url 'edit-file' copyright.copyright_slug file_type %}" method="POST" enctype="multipart/form-data" autocomplete="off">
+        {% csrf_token %}
+
+        <h2>
+            {{ form.application_file.label_tag }}
+            {{ form.deed_of_assignment_file.label_tag }}
+            {{ form.electronic_copy_file.label_tag }}
+            {{ form.author_ids_file.label_tag }}
+            {{ form.memorandum_of_appointment_file.label_tag }}
+            {{ form.certificate_of_registration_file.label_tag }}
+        </h2>
+
+        <div>
+            <ul>
+                <li>Allowed file formats are <b>.pdf</b> and <b>.zip</b>.</li>
+                <li>Click <b>Submit</b> to upload selected file</li>
+                <li>Click <b>Delete</b> to delete current file.</li>
+            </ul>
+        </div>
+
+        {% if form.application_file.errors or form.deed_of_assignment_file.errors or form.electronic_copy_file.errors or form.author_ids_file.errors or form.memorandum_of_appointment_file.errors or form.certificate_of_registration_file.errors%}
+            <br>
+
+            <div class="alert alert-danger">
+                {{ form.application_file.errors}}
+                {{ form.deed_of_assignment_file.errors }}
+                {{ form.electronic_copy_file.errors }}
+                {{ form.author_ids_file.errors }}
+                {{ form.memorandum_of_appointment_file.errors }}
+                {{ form.certificate_of_registration_file.errors }}
+            </div>
+        {% endif %}
+        <br>
+
+        <h5>Current File:</h5>
+        <h4>
+            <a class="file-link" href="{{ file.application_file.url }}" target="_blank">{{ file.application_file.name|file_name }}</a>
+            <a class="file-link" href="{{ file.deed_of_assignment_file.url }}" target="_blank">{{ file.deed_of_assignment_file.name|file_name }}</a>
+            <a class="file-link" href="{{ file.electronic_copy_file.url }}" target="_blank">{{ file.electronic_copy_file.name|file_name }}</a>
+            <a class="file-link" href="{{ file.author_ids_file.url }}" target="_blank">{{ file.author_ids_file.name|file_name }}</a>
+            <a class="file-link" href="{{ file.memorandum_of_appointment_file.url }}" target="_blank">{{ file.memorandum_of_appointment_file.name|file_name }}</a>
+            <a class="file-link" href="{{ file.certificate_of_registration_file.url }}" target="_blank">{{ file.certificate_of_registration_file.name|file_name }}</a>
+        </h4>
+        
+        <br>
+
+        <h5>Upload New File:</h5>
+        {{ form.application_file }}
+        {{ form.deed_of_assignment_file }}
+        {{ form.electronic_copy_file }}
+        {{ form.author_ids_file }}
+        {{ form.memorandum_of_appointment_file }}
+        {{ form.certificate_of_registration_file }}
+        
+        <br>
+        <br>
+
+        <div class="d-flex">
+            <input class='btn btn-success action-button' name="Submit" type="submit" value="Submit">
+            <input class='btn btn-danger action-button' name="Delete" type="submit" value="Delete">
+            <a class="btn btn-secondary action-button" href="{% url 'copyright-detail' copyright.copyright_slug %}">Go Back</a>
+        </div>
+        
+    </form>
+{% endblock content %}

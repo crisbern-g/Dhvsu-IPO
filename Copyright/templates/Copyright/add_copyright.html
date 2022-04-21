@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'Copyright/styles/add_copyright.css' %}">
+{% endblock css_files %}
+
+{% block page_title %}
+    Add New Copyright
+{% endblock page_title %}
+
+{% block sidebar %}{% endblock sidebar %}
+
+{% block content %}
+    <h1>Copyright</h1>
+    <form class="form-block" action="{% url 'add-copyright' %}" method="POST" enctype="multipart/form-data" autocomplete="off">
+        {% csrf_token %}
+        
+        <h3>Add new copyright entry</h3>
+
+        <ul>
+            <li>Name must be <b>unique</b> or not yet existing in the database. </li>
+            <li>Remarks can be <b>empty</b>.</li>
+        </ul>
+
+        {{ form.copyright_application_name.label_tag }}
+
+        {% if form.copyright_application_name.errors %}
+            <div class="alert alert-danger">
+                {{ form.copyright_application_name.errors}}
+            </div>
+        {% endif %}
+        
+        <br>
+        {{ form.copyright_application_name }}
+        
+        <br>
+
+        {{ form.remarks.label_tag }}
+        <br>
+        {{ form.remarks }}
+        <br>
+        
+        <input class='btn btn-success' type="submit" value="Submit">
+    </form>
+    
+{% endblock content %}

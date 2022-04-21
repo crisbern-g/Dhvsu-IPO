@@ -1,0 +1,21 @@
+body{
+    background-color: #ffeeee !important;
+}
+
+.navbar{
+    background-color: #7f1314;
+}
+
+#dhvsu-navbar-text{
+    margin-left: 0px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    padding-left: 20px;
+    text-decoration: none !important;
+}
+
+.page-footer{
+    background-color: #D1B000;
+    margin-top: 10px;
+}

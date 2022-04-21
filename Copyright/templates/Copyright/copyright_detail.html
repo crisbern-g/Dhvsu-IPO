@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'Copyright/styles/add_copyright.css' %}">
+    <link rel="stylesheet" href="{% static 'Copyright/styles/copyright_detail.css' %}">
+{% endblock css_files %}
+
+{% block page_title %}
+    {{application.copyright_application_name}} - Copyright
+{% endblock page_title %}
+
+
+{% block sidebar %}{% endblock sidebar %}
+
+{% block content %}
+    <h1><a class="page-header" href="{% url 'copyright-home' %}">Copyright</a></h1>
+
+    {% for message in messages %}
+        <div class="alert alert-primary">
+            <h3>{{ message }}</h3>
+        </div>
+    {% endfor %}
+
+    <div class="d-flex justify-content-between align-items-center name-block">
+        <h2>{{ application.copyright_application_name }}</h2>
+        <h6>Date Added: {{ application.date_added }}</h6>
+        <h6>Date Modified: {{ application.date_modified }}</h6>
+        
+    </div>
+
+    <div class="name-block">
+        <h2>Remarks</h2>
+        <p>{{ application.remarks|linebreaks }}</p>
+        <a class="btn btn-info" href="{% url 'edit-remarks' application.copyright_slug %}">Edit</a>
+    </div>
+
+    <div class="d-flex files-table">
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th>File Type</th>
+                    <th>File</th>
+                    <th>Date Added</th>
+                    <th>Date Modified</th>
+                    <th>Actions</th>
+                </tr>
+
+                <tbody>
+                    {% comment %} Application File {% endcomment %}
+                    <tr>
+                        <td class="file-type">Application</td>
+
+                        {% if documents.application_file.application_file.name != None %}
+                            <td><a href="{{ documents.application_file.application_file.url }}" target="_blank">{{ documents.application_file.application_file.name|file_name }}</a></td>
+                            <td>{{ documents.application_file.date_added }}</td>
+                            <td>{{ documents.application_file.date_modified }}</td>
+                            <td>
+                                <span>
+                                    <a href="{% url 'edit-file' application.copyright_slug 'application-file' %}" class="btn btn-warning">Update</a>
+                                </span>
+                            </td>
+                        {% else %}
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file">
+                                <span>
+                                    <a href="{% url 'new-file' application.copyright_slug 'application-file'%}" class="btn btn-primary">Upload</a>
+                                </span>
+                            </td>
+                        {% endif %}
+
+                        
+                    </tr>
+
+                    {% comment %} Deed of Assignment {% endcomment %}
+                    <tr>
+                        <td class="file-type">Deed of Assignment</td>
+
+                        {% if documents.deed_of_assignment_file.deed_of_assignment_file.name != None  %}
+                            <td><a href="{{documents.deed_of_assignment_file.deed_of_assignment_file.url}}" target="_blank">{{ documents.deed_of_assignment_file.deed_of_assignment_file.name|file_name }}</td>
+                            <td>{{ documents.deed_of_assignment_file.date_added }}</td>
+                            <td>{{ documents.deed_of_assignment_file.date_modified }}</td>
+                            <td>
+                                <span>
+                                    <a href="{% url 'edit-file' application.copyright_slug 'deed-of-assignment' %}" class="btn btn-warning">Update</a>
+                                </span>
+                            </td>
+                        {% else %}
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file">
+                                <span>
+                                    <a href="{% url 'new-file' application.copyright_slug 'deed-of-assignment'%}" class="btn btn-primary">Upload</a>
+                                </span>
+                            </td>
+                        {% endif %}
+                        
+                    </tr>
+                    
+                    {% comment %} Electronics Copy of the Work {% endcomment %}
+                    <tr>
+                        <td class="file-type">Electronic Copy of the Work</td>
+                        {% if documents.electronic_copy_file.electronic_copy_file.name != None %}
+                            <td><a href="{{documents.electronic_copy_file.electronic_copy_file.url}}" target="_blank">{{ documents.electronic_copy_file.electronic_copy_file.name|file_name }}</a></td>
+                            <td>{{ documents.electronic_copy_file.date_added }}</td>
+                            <td>{{ documents.electronic_copy_file.date_modified }}</td>
+                            <td>
+                                <span>
+                                    <a href="{% url 'edit-file' application.copyright_slug 'electronic-copy' %}" class="btn btn-warning">Update</a>
+                                </span>
+                            </td>
+                        {% else %}
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file">
+                                <span>
+                                    <a href="{% url 'new-file' application.copyright_slug 'electronic-copy'%}" class="btn btn-primary">Upload</a>
+                                </span>
+                            </td>
+                        {% endif %}
+                        
+                    </tr>
+
+                    {% comment %} IDs of the Author {% endcomment %}
+                    <tr>
+                        <td class="file-type">IDs of the Author</td>
+
+                        {% if documents.author_ids_file.author_ids_file.name != None %}
+                            <td><a href="{{ documents.author_ids_file.author_ids_file.url }}" target="_blank">{{ documents.author_ids_file.author_ids_file.name|file_name }}</a></td>
+                            <td>{{ documents.author_ids_file.date_added }}</td>
+                            <td>{{ documents.author_ids_file.date_modified }}</td>
+                            <td>
+                                <span>
+                                    <a href="{% url 'edit-file' application.copyright_slug 'author-ids' %}" class="btn btn-warning">Update</a>
+                                </span>
+                            </td>
+                        {% else %}
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file">
+                                <span>
+                                    <a href="{% url 'new-file' application.copyright_slug 'author-ids'%}" class="btn btn-primary">Upload</a>
+                                </span>
+                            </td>
+                        {% endif %}
+                        
+                    </tr>
+
+                    {% comment %} Memorandum of Appointment {% endcomment %}
+                    <tr>
+                        <td class="file-type">Memorandum of Appointment/ Certificate of Employment</td>
+                        
+                        {% if documents.memorandum_of_appointment_file.memorandum_of_appointment_file.name != None %}
+                            <td><a href="{{documents.memorandum_of_appointment_file.memorandum_of_appointment_file.url}}" target="_blank">{{ documents.memorandum_of_appointment_file.memorandum_of_appointment_file.name|file_name }}</a></td>
+                            <td>{{ documents.memorandum_of_appointment_file.date_added }}</td>
+                            <td>{{ documents.memorandum_of_appointment_file.date_modified }}</td>
+                            <td>
+                                <span>
+                                    <a href="{% url 'edit-file' application.copyright_slug 'memorandum-of-appointment' %}" class="btn btn-warning">Update</a>
+                                </span>
+                            </td>
+                        {% else %}
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file">
+                                <span>
+                                    <a href="{% url 'new-file' application.copyright_slug 'memorandum-of-appointment'%}" class="btn btn-primary">Upload</a>
+                                </span>
+                            </td>
+                        {% endif %}
+                    </tr>
+
+                    {% comment %} Certificate of Registration {% endcomment %}
+                    <tr>
+                        <td class="file-type">Certificate of Registration</td>
+
+                        {% if documents.certificate_of_registration_file.certificate_of_registration_file.name != None  %}
+                            <td><a href="{{documents.certificate_of_registration_file.certificate_of_registration_file.url}}" target="_blank">{{ documents.certificate_of_registration_file.certificate_of_registration_file.name|file_name }}</a></td>
+                            <td>{{ documents.certificate_of_registration_file.date_added }}</td>
+                            <td>{{ documents.certificate_of_registration_file.date_modified }}</td>
+                            <td>
+                                <span>
+                                    <a href="{% url 'edit-file' application.copyright_slug 'certificate-of-registration' %}" class="btn btn-warning">Update</a>
+                                </span>
+                            </td>
+                        {% else %}
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file">
+                                <span>
+                                    <a href="{% url 'new-file' application.copyright_slug 'certificate-of-registration'%}" class="btn btn-primary">Upload</a>
+                                </span>
+                            </td>
+                        {% endif %}
+                        
+                    </tr>
+
+                </tbody>
+            </thead>
+        </table>
+    </div>
+
+    <a href="{% url 'delete-whole' application.copyright_slug %}" class="btn btn-danger">Delete Entry</a>
+    
+{% endblock content %}
