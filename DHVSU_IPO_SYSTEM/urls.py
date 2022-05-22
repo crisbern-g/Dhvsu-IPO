@@ -22,7 +22,12 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Site.urls')),
+
+    #Copyright
     path('copyright/', include('Copyright.urls')),
+
+    #Patent
+    path('patent/', include('Patent.urls')),
 
     # Authentication
     path('authentication/', include('Authentication.urls')),

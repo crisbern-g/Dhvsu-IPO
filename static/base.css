@@ -1,9 +1,91 @@
-body{
-    background-color: #ffeeee !important;
-}
-
 .navbar{
     background-color: #7f1314;
+}
+
+.sidebar{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: 20px;
+}
+
+.top-sidebar{
+    position: relative !important;
+    top: 0px;
+    padding-top: 10%;
+}
+
+.top-color{
+    position: absolute;
+    top: 0;
+    background-color: #7f1314;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    min-height: 60%;
+    min-width: 100%;
+    padding: 10px;
+    z-index: 1;
+}
+
+.user-picture{
+    min-height: 120px;
+    min-width: 120px;
+    max-height: 120px;
+    max-width: 120px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: white;
+    border: solid 4px whitesmoke;
+    margin-bottom: 10px;
+    z-index: 20;
+}
+
+.mid-sidebar{
+    padding-left: 0px;
+}
+
+.mid-sidebar h4{
+    padding-left: 10px;
+}
+
+.mid-sidebar ul{
+    list-style: none;
+    margin: 0 !important;
+    padding-left: 0 !important;
+}
+
+.mid-sidebar li{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    font-size: 20px;
+    border-bottom: 1px solid rgb(248, 248, 248);
+}
+
+.mid-sidebar a{
+    text-decoration: none !important;
+    color: black;
+}
+
+.mid-sidebar li:first-of-type{
+    border-top: 1px solid rgb(247, 247, 247);
+}
+
+.mid-sidebar li:hover{
+    cursor: pointer;
+    background-color: rgb(228, 228, 228);
+    transition-property: background-color;
+    transition: 50ms;
+}
+
+.sidebar-active{
+    background-color: rgb(228, 250, 255);
+    border-left: solid 3px rgb(32, 0, 150);
+}
+
+.bottom-sidebar{
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #dhvsu-navbar-text{

@@ -55,12 +55,12 @@
 
         <h5>Current File:</h5>
         <h4>
-            <a class="file-link" href="{{ file.application_file.url }}" target="_blank">{{ file.application_file.name|file_name }}</a>
-            <a class="file-link" href="{{ file.deed_of_assignment_file.url }}" target="_blank">{{ file.deed_of_assignment_file.name|file_name }}</a>
-            <a class="file-link" href="{{ file.electronic_copy_file.url }}" target="_blank">{{ file.electronic_copy_file.name|file_name }}</a>
-            <a class="file-link" href="{{ file.author_ids_file.url }}" target="_blank">{{ file.author_ids_file.name|file_name }}</a>
-            <a class="file-link" href="{{ file.memorandum_of_appointment_file.url }}" target="_blank">{{ file.memorandum_of_appointment_file.name|file_name }}</a>
-            <a class="file-link" href="{{ file.certificate_of_registration_file.url }}" target="_blank">{{ file.certificate_of_registration_file.name|file_name }}</a>
+            <a class="file-link" href="{{ file.application_file.url }}" target="_blank">{{ file.application_file.name|file_name|truncatechars:50 }}</a>
+            <a class="file-link" href="{{ file.deed_of_assignment_file.url }}" target="_blank">{{ file.deed_of_assignment_file.name|file_name|truncatechars:50 }}</a>
+            <a class="file-link" href="{{ file.electronic_copy_file.url }}" target="_blank">{{ file.electronic_copy_file.name|file_name|truncatechars:50 }}</a>
+            <a class="file-link" href="{{ file.author_ids_file.url }}" target="_blank">{{ file.author_ids_file.name|file_name|truncatechars:50 }}</a>
+            <a class="file-link" href="{{ file.memorandum_of_appointment_file.url }}" target="_blank">{{ file.memorandum_of_appointment_file.name|file_name|truncatechars:50 }}</a>
+            <a class="file-link" href="{{ file.certificate_of_registration_file.url }}" target="_blank">{{ file.certificate_of_registration_file.name|file_name|truncatechars:50 }}</a>
         </h4>
         
         <br>

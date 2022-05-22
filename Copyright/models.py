@@ -1,6 +1,7 @@
 from django.utils.text import slugify
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from django.utils.crypto import get_random_string
 
 def custom_upload_path(instance, filename):
     return f'copyright/{instance.copyright_application.copyright_application_name}/{filename}'
@@ -11,13 +12,16 @@ class CopyRightApplicationModel(models.Model):
     date_added = models.DateTimeField(auto_now_add=True, editable=False, null=True)
     date_modified = models.DateTimeField(auto_now=True, null=True)
     remarks = models.TextField(null=True, blank=True)
-    copyright_slug = models.SlugField(null=True, db_index=True)
+    copyright_slug = models.SlugField(null=True, db_index=True, unique=True)
 
 
     def save(self, *args, **kwargs):
-        self.copyright_slug = slugify(self.copyright_application_name)
+        if self.copyright_slug == None:
+            self.copyright_slug = slugify(self.copyright_application_name)
+            self.copyright_slug = self.copyright_slug + get_random_string(length=8)
 
         super().save(*args, **kwargs)
+
 
     def __str__(self):
         return self.copyright_application_name

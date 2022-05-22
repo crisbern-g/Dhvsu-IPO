@@ -2,9 +2,10 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.views import View
 from django.shortcuts import redirect, render, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CopyRightApplicationModel
 from .forms import AddCopyrightForm, AddCopyrightApplicationFileForm, AddDeedOfAssignmentFileForm, ElectronicCopyFileForm, AuthorIdsFileForm, MemorandumOfAppointmentFileForm, CertificateOfRegistrationFileForm, EditRemarksForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
 class CopyrightHome(LoginRequiredMixin, View):

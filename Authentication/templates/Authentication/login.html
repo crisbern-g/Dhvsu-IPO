@@ -11,16 +11,18 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row row-cols-lg-2 row-cols-sm-1 row-cols-xs-1">
             {% comment %} Left Side {% endcomment %}
-            <div class="col-7 g-0">
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 g-0">
                 <div class="d-flex flex-column align-items-center justify-content-center left-side">
+                    <img class="ipo-office" src="{% static 'Authentication/images/ipo-office.jpg' %}" alt="">
                     <img class="dhvsu-logo" src="{% static 'dhvsu_logo.png' %}" alt="">
+                    <div class="ipo-office-overlay"></div>
                     <h2>DHVSU Intellectual Property Office</h2>
                 </div>
             </div>
 
-            <div class="col-5 g-0">
+            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 g-0">
                 <div class="d-flex flex-column align-items-center justify-content-center login-form">
                     <h4>LOGIN REQUIRED</h4>
 

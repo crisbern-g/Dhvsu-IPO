@@ -10,7 +10,7 @@
 {% endblock css_files %}
 
 {% block content %}
-    <div class="row row-cols-xl-2 row-cols-sm-1">
+    <div class="row row-cols-xl-2 row-cols-sm-1 row-cols-xs-1">
         {% comment %} Copyright {% endcomment %}
         <div class="col">
             <div class="card ip-card" onclick="window.location='{% url 'copyright-home' %}'">
@@ -28,7 +28,7 @@
 
         {% comment %} Patent {% endcomment %}
         <div class="col">
-            <div class="card ip-card">
+            <div class="card ip-card" onclick="window.location='{% url 'patent-home' %}'">
                 <div class="card-body">
                   <h5 class="card-title">Special title treatment</h5>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>

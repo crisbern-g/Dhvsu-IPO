@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block css_files %}
-    <link rel="stylesheet" href="{% static 'Copyright/styles/copyright_home.css' %}">
+    <link rel="stylesheet" href="{% static 'Patent/styles/patent_home.css' %}">
 {% endblock css_files %}
 
 {% block page_title %}
-    Copyright
+    Patent
 {% endblock page_title %}
 
 {% block sidebar %}
@@ -20,19 +20,19 @@
         </div>
     {% endfor %}
 
-    <div class="copyright-wrapper">
+    <div class="wrapper">
 
-        <h3>Copyright</h3>
+        <h3>Patent</h3>
             
 
-        <form class="d-flex align-items-start" method="get" action="{% url 'search-copyright' %}">
+        <form class="d-flex align-items-start" method="get" action="{% url 'search-patent' %}">
             <input name="search_query" id="searchbar" type="text" placeholder="Search...">
             <input class="btn btn-primary search-button" type="submit" value="Search">
         </form>
 
         
         <div>
-            <a href="{% url 'add-copyright' %}" class="btn btn-success">Add New Copyright</a>
+            <a href="{% url 'add-patent' %}" class="btn btn-success">Add New Patent</a>
         </div>
         
         <br>
@@ -49,64 +49,57 @@
                 </thead>
                 
                 <tbody>
-                    {% for application in copyrights %}
+                    {% for application in patents %}
                         <tr>
-                            <td class="td-copyright-name"><a href="{% url 'copyright-detail' application.copyright_slug %}">{{ application.copyright_application_name }}</a></td>
+                            <td class="td-copyright-name"><a href="{% url 'patent-detail' application.patent_slug %}">{{ application.patent_application_name }}</a></td>
                             <td class="table-complete-column">
                                 <ul>
-                                    {% if application.copyright_application.first.application_file  %}
-                                        <li>Application</li>
+                                    {% if application.patent_draft.first %}
+                                        <li>Patent Draft</li>
                                     {% endif %}
         
-                                    {% if application.deed_of_assignment.first.deed_of_assignment_file %}
-                                        <li>Deed of Assignmnet</li>
+                                    {% if application.invention_pictures.first %}
+                                        <li>Pictures of the Invention</li>
+                                    {% endif %}
+
+                                    {% if application.abstract_file.first %}
+                                        <li>Abstract</li>
                                     {% endif %}
         
-                                    {% if application.electronic_copy.first.electronic_copy_file %}
-                                        <li>Electronic Copy</li>
-                                    {% endif %}
-        
-                                    {% if application.author_ids.first.author_ids_file %}
+                                    {% if application.author_ids.first %}
                                         <li>IDs of the Authors</li>
                                     {% endif %}
         
-                                    {% if application.memorandum_of_appointment.first.memorandum_of_appointment_file %}
+                                    {% if application.memorandum_of_appointment.first %}
                                         <li>Memorandum of Appointment</li>
-                                    {% endif %}
-        
-                                    {% if application.certificate_of_registration.first.certificate_of_registration_file %}
-                                        <li>Certificate of Registration</li>
                                     {% endif %}
                                 </ul>
                             </td>
 
                             <td class="table-incomplete-column">
                                 <ul>
-                                    {% if not application.copyright_application.first.application_file  %}
-                                        <li>Application</li>
+                                    {% if not application.patent_draft.first %}
+                                        <li>Patent Draft</li>
                                     {% endif %}
         
-                                    {% if not application.deed_of_assignment.first.deed_of_assignment_file %}
-                                        <li>Deed of Assignmnet</li>
+                                    {% if not application.invention_pictures.first %}
+                                        <li>Pictures of the Invention</li>
+                                    {% endif %}
+
+                                    {% if not application.abstract_file.first %}
+                                        <li>Abstract</li>
                                     {% endif %}
         
-                                    {% if not application.electronic_copy.first.electronic_copy_file %}
-                                        <li>Electronic Copy</li>
-                                    {% endif %}
-        
-                                    {% if not application.author_ids.first.author_ids_file %}
+                                    {% if not application.author_ids.first %}
                                         <li>IDs of the Authors</li>
                                     {% endif %}
         
-                                    {% if not application.memorandum_of_appointment.first.memorandum_of_appointment_file %}
+                                    {% if not application.memorandum_of_appointment.first %}
                                         <li>Memorandum of Appointment</li>
-                                    {% endif %}
-        
-                                    {% if not application.certificate_of_registration.first.certificate_of_registration_file %}
-                                        <li>Certificate of Registration</li>
                                     {% endif %}
                                 </ul>
                             </td>
+
                             <td>{{ application.date_added | date:"SHORT_DATE_FORMAT"}}</td>
                             <td>{{ application.date_modified | date:"SHORT_DATE_FORMAT" }}</td>
                         </tr>
@@ -119,27 +112,27 @@
         <nav aria-label="...">
             <ul class="pagination">
                 
-                {% if copyrights.number > 1 %}
+                {% if patents.number > 1 %}
                     <a class="page-link" href="?page=1" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 {% endif %}
                 
 
-                {% if copyrights.has_previous %}
+                {% if patents.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ copyrights.previous_page_number }}">Previous</a>
+                        <a class="page-link" href="?page={{ patents.previous_page_number }}">Previous</a>
                     </li>
                 {% endif %}
                 
                 
-                {% for num in copyrights.paginator.page_range %}
+                {% for num in patents.paginator.page_range %}
 
-                    {% if num == copyrights.number %}
+                    {% if num == patents.number %}
                         <li class="page-item active" aria-current="page">
                             <a class="page-link" href="#">{{ num }}</a>
                         </li>
-                    {% elif num > copyrights.number|add:'-4' and num < copyrights.number|add:'4'%}
+                    {% elif num > patents.number|add:'-4' and num < patents.number|add:'4'%}
                         <li class="page-item">
                             <a class="page-link" href="?page={{ num }}">{{ num }}</a>
                         </li>
@@ -147,16 +140,16 @@
                 
                 {% endfor %}
                 
-                {% if copyrights.has_next %}
+                {% if patents.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ copyrights.next_page_number }}">Next</a>
+                        <a class="page-link" href="?page={{ patents.next_page_number }}">Next</a>
                     </li>
                 {% endif %}
                 
                 
-                {% if copyrights.number < copyrights.paginator.num_pages %}
+                {% if patents.number < patents.paginator.num_pages %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ copyrights.paginator.num_pages }}" aria-label="Next">
+                        <a class="page-link" href="?page={{ patents.paginator.num_pages }}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

@@ -23,20 +23,21 @@
         </div>
     {% endfor %}
 
-    <div class="d-flex justify-content-between align-items-center name-block">
+    <div class="d-flex flex-column name-block">
         <h2>{{ application.copyright_application_name }}</h2>
         <h6>Date Added: {{ application.date_added }}</h6>
         <h6>Date Modified: {{ application.date_modified }}</h6>
         
     </div>
 
-    <div class="name-block">
+    {% comment %} Remarks {% endcomment %}
+    <div class="remarks-block">
         <h2>Remarks</h2>
         <p>{{ application.remarks|linebreaks }}</p>
         <a class="btn btn-info" href="{% url 'edit-remarks' application.copyright_slug %}">Edit</a>
     </div>
 
-    <div class="d-flex files-table">
+    <div class="table-responsive files-table">
         <table class="table table-borderless">
             <thead>
                 <tr>
@@ -53,7 +54,7 @@
                         <td class="file-type">Application</td>
 
                         {% if documents.application_file.application_file.name != None %}
-                            <td><a href="{{ documents.application_file.application_file.url }}" target="_blank">{{ documents.application_file.application_file.name|file_name }}</a></td>
+                            <td><a href="{{ documents.application_file.application_file.url }}" target="_blank">{{ documents.application_file.application_file.name|file_name|truncatechars:30 }}</a></td>
                             <td>{{ documents.application_file.date_added }}</td>
                             <td>{{ documents.application_file.date_modified }}</td>
                             <td>
@@ -80,7 +81,7 @@
                         <td class="file-type">Deed of Assignment</td>
 
                         {% if documents.deed_of_assignment_file.deed_of_assignment_file.name != None  %}
-                            <td><a href="{{documents.deed_of_assignment_file.deed_of_assignment_file.url}}" target="_blank">{{ documents.deed_of_assignment_file.deed_of_assignment_file.name|file_name }}</td>
+                            <td><a href="{{documents.deed_of_assignment_file.deed_of_assignment_file.url}}" target="_blank">{{ documents.deed_of_assignment_file.deed_of_assignment_file.name|file_name|truncatechars:30 }}</td>
                             <td>{{ documents.deed_of_assignment_file.date_added }}</td>
                             <td>{{ documents.deed_of_assignment_file.date_modified }}</td>
                             <td>
@@ -105,7 +106,7 @@
                     <tr>
                         <td class="file-type">Electronic Copy of the Work</td>
                         {% if documents.electronic_copy_file.electronic_copy_file.name != None %}
-                            <td><a href="{{documents.electronic_copy_file.electronic_copy_file.url}}" target="_blank">{{ documents.electronic_copy_file.electronic_copy_file.name|file_name }}</a></td>
+                            <td><a href="{{documents.electronic_copy_file.electronic_copy_file.url}}" target="_blank">{{ documents.electronic_copy_file.electronic_copy_file.name|file_name|truncatechars:30 }}</a></td>
                             <td>{{ documents.electronic_copy_file.date_added }}</td>
                             <td>{{ documents.electronic_copy_file.date_modified }}</td>
                             <td>
@@ -131,7 +132,7 @@
                         <td class="file-type">IDs of the Author</td>
 
                         {% if documents.author_ids_file.author_ids_file.name != None %}
-                            <td><a href="{{ documents.author_ids_file.author_ids_file.url }}" target="_blank">{{ documents.author_ids_file.author_ids_file.name|file_name }}</a></td>
+                            <td><a href="{{ documents.author_ids_file.author_ids_file.url }}" target="_blank">{{ documents.author_ids_file.author_ids_file.name|file_name|truncatechars:30 }}</a></td>
                             <td>{{ documents.author_ids_file.date_added }}</td>
                             <td>{{ documents.author_ids_file.date_modified }}</td>
                             <td>
@@ -157,7 +158,7 @@
                         <td class="file-type">Memorandum of Appointment/ Certificate of Employment</td>
                         
                         {% if documents.memorandum_of_appointment_file.memorandum_of_appointment_file.name != None %}
-                            <td><a href="{{documents.memorandum_of_appointment_file.memorandum_of_appointment_file.url}}" target="_blank">{{ documents.memorandum_of_appointment_file.memorandum_of_appointment_file.name|file_name }}</a></td>
+                            <td><a href="{{documents.memorandum_of_appointment_file.memorandum_of_appointment_file.url}}" target="_blank">{{ documents.memorandum_of_appointment_file.memorandum_of_appointment_file.name|file_name|truncatechars:30 }}</a></td>
                             <td>{{ documents.memorandum_of_appointment_file.date_added }}</td>
                             <td>{{ documents.memorandum_of_appointment_file.date_modified }}</td>
                             <td>
@@ -182,7 +183,7 @@
                         <td class="file-type">Certificate of Registration</td>
 
                         {% if documents.certificate_of_registration_file.certificate_of_registration_file.name != None  %}
-                            <td><a href="{{documents.certificate_of_registration_file.certificate_of_registration_file.url}}" target="_blank">{{ documents.certificate_of_registration_file.certificate_of_registration_file.name|file_name }}</a></td>
+                            <td><a href="{{documents.certificate_of_registration_file.certificate_of_registration_file.url}}" target="_blank">{{ documents.certificate_of_registration_file.certificate_of_registration_file.name|file_name|truncatechars:30 }}</a></td>
                             <td>{{ documents.certificate_of_registration_file.date_added }}</td>
                             <td>{{ documents.certificate_of_registration_file.date_modified }}</td>
                             <td>

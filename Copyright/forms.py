@@ -1,5 +1,3 @@
-from pyexpat import model
-from statistics import mode
 from django import forms
 from .models import CopyRightApplicationModel, CopyrightApplicationFileModel, DeedOfAssignmentFileModel, ElectronicCopyFileModel, AuthorIdsFileModel, MemorandumOfAppointmentFileModel, CertificateOfRegistrationFileModel
 
@@ -105,8 +103,6 @@ class AuthorIdsFileForm(forms.ModelForm):
             'author_ids_file' : forms.FileInput(attrs={'accept' : '.pdf,.zip'})
         }
         
-
-
 
 class MemorandumOfAppointmentFileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

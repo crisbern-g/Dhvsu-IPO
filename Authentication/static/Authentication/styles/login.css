@@ -8,6 +8,7 @@ body{
 }
 
 .left-side{
+    position: relative;
     min-height: 100vh;
     min-width: 100vh;
     background-color: rgb(0, 0, 0);
@@ -15,11 +16,31 @@ body{
 
 .left-side h2{
     color: white;
+    z-index: 100;
+}
+
+.ipo-office{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+}
+
+.ipo-office-overlay{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 50%;
+    z-index: 20;
 }
 
 .dhvsu-logo{
     width: 30%;
     height: 30%;
+    z-index: 100;
 }
 
 /* Right side */
@@ -30,6 +51,7 @@ body{
     width: 100%;
     margin-right: 0px;
     border-left: solid 2px gold;
+    border-right: solid 2px gold;
 }
 
 .login-form h4{
@@ -43,7 +65,7 @@ body{
     border-radius: 10px;
     border: solid 2px rgb(255, 255, 255) !important;
     background-color: rgb(255, 255, 255);
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .form input[type="text"]:focus,

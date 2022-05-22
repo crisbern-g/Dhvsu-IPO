@@ -13,33 +13,67 @@
 
 <body>
     {% comment %} Navbar {% endcomment %}
-    <nav class="navbar">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <a class="navbar-brand d-flex align-items-center" href="{% url 'index-page' %}">
             <img src="{% static 'dhvsu_logo.png' %}" alt="" width="100" height="100" class="d-inline-block align-text-top">
             <span id="dhvsu-navbar-text">DHVSU INTELLECTUAL PROPERTY OFFICE</span>
           </a>
         </div>
+      </div>
     </nav>
 
     <div class="container-fluid">
 
-      <div class="row">
+      <div class="row row-cols-lg-2 row-cols-md-1 row-cols-sm-1 row-cols-xs-1">
 
-          {% comment %} Sidebar {% endcomment %}
-          <div class="col col-2 vh-100" id="sidebar">
-            {% block sidebar %}{% endblock sidebar %}
-            {% if user.is_authenticated %}
-              Logged in as: {{ user.username }}
-            {% endif %}
-            <form action="{% url 'logout' %}" method="post">
-              {% csrf_token %}
-              <input class="btn btn-danger" type="submit" value="LOGOUT">
-            </form>
+        {% comment %} Sidebar {% endcomment %}
+        <div class="col col-lg-3 col-sm-12 col-sm-12 col-xs-12" id="sidebar">
+          {% block sidebar %}{% endblock sidebar %}
+
+          <div class="sidebar">
+            <div class="d-flex align-items-center flex-column top-sidebar">
+              <div class="top-color"></div>
+              {% if user.is_authenticated %}
+                <img class="user-picture responsive" src="{{ user.user_picture.first.user_picture.url }}" alt="">
+                <b><h4>{{ user.username }}</b></h4>
+              {% endif %}
+            </div>
+
+            <div class="d-flex flex-column mid-sidebar">
+              <h4>Links</h4>
+
+              <ul>
+                <a href="{% url 'index-page' %}"><li>Home</li></a>
+              </ul>
+
+              <h4>Shortcuts</h4>
+              <ul>
+                <li class="sidebar-active">Copyright</li>
+                <li>Patent</li>
+                <li>Industrial Design</li>
+                <li>Utility Model</li>
+                <li>Trademark</li>
+                <li>ISSN</li>
+              </ul>
+            </div>
+
+            <div class="bottom-sidebar d-flex align-items-center justify-content-center">
+              <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <input class="btn btn-outline-danger" type="submit" value="LOGOUT">
+              </form>
+            </div>
           </div>
+
+        </div>
           
           {% comment %} main content {% endcomment %}
-          <div class="col col-10">
+          <div class="col col-lg-9 col-sm-12 col-xs-12">
             {% block content %}{% endblock content %}
           </div>
 
