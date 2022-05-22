@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Site',
     'Copyright',
     'Patent',
+    'Utility_Model',
     'Authentication',
 ]
 
