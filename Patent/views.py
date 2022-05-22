@@ -22,7 +22,8 @@ class PatentHome(LoginRequiredMixin, View):
             'patents' : patents
         }
 
-        return render(request, 'Patent/patent_home.html', context)
+        return render(request, 'Patent/home.html', context)
+
 
 class SearchView(LoginRequiredMixin,View):
     login_url = 'login'
@@ -50,7 +51,7 @@ class AddPatentView(LoginRequiredMixin, View):
             'form' : form
         }
 
-        return render(request, 'Patent/add_patent.html', context)
+        return render(request, 'Patent/add.html', context)
 
 
     def post(self, request):
@@ -66,7 +67,7 @@ class AddPatentView(LoginRequiredMixin, View):
             'form' : form
         }
 
-        return render(request, 'Patent/add_patent.html', context)
+        return render(request, 'Patent/add.html', context)
 
 
 class PatentDetailView(LoginRequiredMixin, View):
@@ -94,7 +95,7 @@ class PatentDetailView(LoginRequiredMixin, View):
             'application' : patent_application
         }
 
-        return render(request, 'Patent/patent_detail.html', context)
+        return render(request, 'Patent/detail.html', context)
 
 
 class EditRemarks(LoginRequiredMixin, View):
