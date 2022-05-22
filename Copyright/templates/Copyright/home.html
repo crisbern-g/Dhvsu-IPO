@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block css_files %}
-    <link rel="stylesheet" href="{% static 'Copyright/styles/copyright_home.css' %}">
+    <link rel="stylesheet" href="{% static 'Copyright/styles/home.css' %}">
 {% endblock css_files %}
 
 {% block page_title %}
@@ -20,7 +20,7 @@
         </div>
     {% endfor %}
 
-    <div class="copyright-wrapper">
+    <div class="wrapper">
 
         <h3>Copyright</h3>
             
@@ -51,7 +51,7 @@
                 <tbody>
                     {% for application in copyrights %}
                         <tr>
-                            <td class="td-copyright-name"><a href="{% url 'copyright-detail' application.copyright_slug %}">{{ application.copyright_application_name }}</a></td>
+                            <td class="td-name"><a href="{% url 'copyright-detail' application.copyright_slug %}">{{ application.copyright_application_name }}</a></td>
                             <td class="table-complete-column">
                                 <ul>
                                     {% if application.copyright_application.first.application_file  %}

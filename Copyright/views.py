@@ -22,7 +22,7 @@ class CopyrightHome(LoginRequiredMixin, View):
             'copyrights' : copyrights
         }
 
-        return render(request, 'Copyright/copyright_home.html', context)
+        return render(request, 'Copyright/home.html', context)
 
 
 class SearchView(LoginRequiredMixin,View):
@@ -53,7 +53,7 @@ class AddCopyrightView(LoginRequiredMixin, View):
             'form' : form
         }
 
-        return render(request, 'Copyright/add_copyright.html', context)
+        return render(request, 'Copyright/add.html', context)
 
 
     def post(self, request):
@@ -69,7 +69,7 @@ class AddCopyrightView(LoginRequiredMixin, View):
             'form' : form
         }
 
-        return render(request, 'Copyright/add_copyright.html', context)
+        return render(request, 'Copyright/add.html', context)
 
 
 class EditRemarks(LoginRequiredMixin, View):
@@ -136,7 +136,7 @@ class CopyrightDetailView(LoginRequiredMixin, View):
             'application' : copyright_application
         }
 
-        return render(request, 'Copyright/copyright_detail.html', context)
+        return render(request, 'Copyright/detail.html', context)
 
 
 class AddSingleFile(LoginRequiredMixin, View):
