@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Patent',
     'Utility_Model',
     'Industrial_Design',
+    'Trademark',
     'Authentication',
 ]
 

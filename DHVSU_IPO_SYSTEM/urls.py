@@ -32,7 +32,10 @@ urlpatterns = [
     path('utility-model/', include('Utility_Model.urls')),
 
     #Industrial Design
-    path('industrial-design', include('Industrial_Design.urls')),
+    path('industrial-design/', include('Industrial_Design.urls')),
+
+    #Trademark
+    path('trademark/', include('Trademark.urls')),
 
     # Authentication
     path('authentication/', include('Authentication.urls')),

@@ -15,10 +15,10 @@ class IndustrialDesignHome(LoginRequiredMixin, View):
 
         table_page = Paginator(applications, 20)
         current_page = request.GET.get('page')
-        utility_models = table_page.get_page(current_page)
+        industrial_designs = table_page.get_page(current_page)
 
         context = {
-            'industrial_designs' : utility_models
+            'industrial_designs' : industrial_designs
         }
 
         return render(request, 'Industrial_Design/home.html', context)

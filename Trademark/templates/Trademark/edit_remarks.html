@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'Ip_Styles/edit_remarks.css' %}">
+{% endblock css_files %}
+
+{% block page_title %}
+    Edit Remarks
+{% endblock page_title %}
+
+{% block sidebar %}
+    {% include 'side_bar.html' with page='utility'%}
+{% endblock sidebar %}
+
+{% block content %}
+<h1>Trademark</h1>
+<form class="form-block" action="{% url 'edit-remarks-trademark' application.slug %}" method="POST" enctype="multipart/form-data" autocomplete="off">
+    {% csrf_token %}
+    
+    {{ form.remarks.label_tag }}
+    <br>
+    {{ form.remarks }}
+    <br>
+    
+    <input class='btn btn-success' type="submit" value="Submit">
+    <a class="btn btn-secondary" href="{% url 'trademark-detail' application.slug %}">Back</a>
+</form>
+{% endblock content %}

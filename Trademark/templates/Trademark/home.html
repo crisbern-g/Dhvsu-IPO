@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'Ip_Styles/home.css' %}">
+{% endblock css_files %}
+
+{% block page_title %}
+    Trademark
+{% endblock page_title %}
+
+{% block sidebar %}
+    {% include 'side_bar.html' with page='utility'%}
+{% endblock sidebar %}
+
+{% block content %}
+    {% for message in messages %}
+        <div class="alert alert-warning notification">
+            <h5>{{ message }}</h5>
+        </div>
+    {% endfor %}
+
+    <div class="wrapper">
+
+        <h3>Trademark</h3>
+            
+
+        <form class="d-flex align-items-start" method="get" action="{% url 'search-trademark' %}">
+            <input name="search_query" id="searchbar" type="text" placeholder="Search...">
+            <input class="btn btn-primary search-button" type="submit" value="Search">
+        </form>
+
+        
+        <div>
+            <a href="{% url 'add-trademark' %}" class="btn btn-success">Add New Trademark</a>
+        </div>
+        
+        <br>
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Completed Files</th>
+                        <th>Missing Files</th>
+                        <th>Date Added</th>
+                        <th>Date Modified</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for application in trademarks %}
+                        <tr>
+                            <td class="td-name"><a href="{% url 'trademark-detail' application.slug %}">{{ application.application_name }}</a></td>
+                            <td class="table-complete-column">
+                                <ul>
+                                    {% if application.application_form.first %}
+                                        <li>Application Form</li>
+                                    {% endif %}
+        
+                                    {% if application.mark.first %}
+                                        <li>Mark</li>
+                                    {% endif %}
+        
+                                    {% if application.author_ids.first %}
+                                        <li>IDs of the Authors</li>
+                                    {% endif %}
+        
+                                    {% if application.memorandum_of_appointment.first %}
+                                        <li>Memorandum of Appointment</li>
+                                    {% endif %}
+                                </ul>
+                            </td>
+
+                            <td class="table-incomplete-column">
+                                <ul>
+                                    {% if not application.application_form.first %}
+                                        <li>Application Form</li>
+                                    {% endif %}
+        
+                                    {% if not application.mark.first %}
+                                        <li>Mark</li>
+                                    {% endif %}
+        
+                                    {% if not application.author_ids.first %}
+                                        <li>IDs of the Authors</li>
+                                    {% endif %}
+        
+                                    {% if not application.memorandum_of_appointment.first %}
+                                        <li>Memorandum of Appointment</li>
+                                    {% endif %}
+                                </ul>
+                            </td>
+
+                            <td>{{ application.date_added | date:"SHORT_DATE_FORMAT"}}</td>
+                            <td>{{ application.date_modified | date:"SHORT_DATE_FORMAT" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+        
+            </table>
+        </div>
+        
+        {% comment %} Pagination {% endcomment %}
+        <nav aria-label="...">
+            <ul class="pagination">
+                
+                {% if trademarks.number > 1 %}
+                    <a class="page-link" href="?page=1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                {% endif %}
+                
+
+                {% if trademarks.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ trademarks.previous_page_number }}">Previous</a>
+                    </li>
+                {% endif %}
+                
+                
+                {% for num in trademarks.paginator.page_range %}
+
+                    {% if num == trademarks.number %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">{{ num }}</a>
+                        </li>
+                    {% elif num > trademarks.number|add:'-4' and num < trademarks.number|add:'4'%}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                
+                {% endfor %}
+                
+                {% if trademarks.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ trademarks.next_page_number }}">Next</a>
+                    </li>
+                {% endif %}
+                
+                
+                {% if trademarks.number < trademarks.paginator.num_pages %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ trademarks.paginator.num_pages }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+                
+            </ul>
+        </nav>
+    </div>
+{% endblock content %}
