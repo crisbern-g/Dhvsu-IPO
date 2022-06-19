@@ -29,53 +29,17 @@
 
     <div class="container-fluid">
 
-      <div class="row row-cols-lg-2 row-cols-md-1 row-cols-sm-1 row-cols-xs-1">
+      <div class="row row-cols-lg-2 row-cols-md-2 row-cols-sm-1 row-cols-xs-1">
 
         {% comment %} Sidebar {% endcomment %}
         <div class="col col-lg-3 col-sm-12 col-sm-12 col-xs-12" id="sidebar">
           {% block sidebar %}{% endblock sidebar %}
-
-          <div class="sidebar">
-            <div class="d-flex align-items-center flex-column top-sidebar">
-              <div class="top-color"></div>
-              {% if user.is_authenticated %}
-                <img class="user-picture responsive" src="{{ user.user_picture.first.user_picture.url }}" alt="">
-                <b><h4>{{ user.username }}</b></h4>
-              {% endif %}
-            </div>
-
-            <div class="d-flex flex-column mid-sidebar">
-              <h4>Links</h4>
-
-              <ul>
-                <a href="{% url 'index-page' %}"><li>Home</li></a>
-              </ul>
-
-              <h4>Shortcuts</h4>
-              <ul>
-                <li class="sidebar-active">Copyright</li>
-                <li>Patent</li>
-                <li>Industrial Design</li>
-                <li>Utility Model</li>
-                <li>Trademark</li>
-                <li>ISSN</li>
-              </ul>
-            </div>
-
-            <div class="bottom-sidebar d-flex align-items-center justify-content-center">
-              <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <input class="btn btn-outline-danger" type="submit" value="LOGOUT">
-              </form>
-            </div>
-          </div>
-
         </div>
-          
-          {% comment %} main content {% endcomment %}
-          <div class="col col-lg-9 col-sm-12 col-xs-12">
-            {% block content %}{% endblock content %}
-          </div>
+
+        {% comment %} main content {% endcomment %}
+        <div class="col col-lg-9 col-sm-12 col-xs-12">
+          {% block content %}{% endblock content %}
+        </div>
 
       </div>
 

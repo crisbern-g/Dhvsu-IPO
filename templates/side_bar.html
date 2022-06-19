@@ -1,0 +1,34 @@
+<div class="sidebar">
+    <div class="d-flex align-items-center flex-column top-sidebar">
+      <div class="top-color"></div>
+      {% if user.is_authenticated %}
+        <img class="user-picture responsive" src="{{ user.user_picture.first.user_picture.url }}" alt="">
+        <b><h4>{{ user.username }}</b></h4>
+      {% endif %}
+    </div>
+
+    <div class="d-flex flex-column mid-sidebar">
+      <h4>Links</h4>
+
+      <ul>
+        <a href="{% url 'index-page' %}"><li class={% if page == 'home' %}"sidebar-active"{% endif %}>Home</li></a>
+      </ul>
+
+      <h4>Shortcuts</h4>
+      <ul>
+        <a href="{% url 'copyright-home' %}"><li class={% if page == 'copyright' %}"sidebar-active"{% endif %}>Copyright</li></a>
+        <a href="{% url 'patent-home' %}"><li class={% if page == 'patent' %}"sidebar-active"{% endif %}>Patent</li></a>
+        <li>Industrial Design</li>
+        <a href="{% url 'utility-model-home' %}"><li class={% if page == 'utility' %}"sidebar-active"{% endif %}>Utility Model</li></a>
+        <li>Trademark</li>
+        <li>ISSN</li>
+      </ul>
+    </div>
+
+    <div class="bottom-sidebar d-flex align-items-center justify-content-center">
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-outline-danger" type="submit" value="LOGOUT">
+      </form>
+    </div>
+</div>

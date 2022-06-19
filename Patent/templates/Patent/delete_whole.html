@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="{% static 'Ip_Styles/delete_whole.css' %}">
 {% endblock css_files %}
 
+{% block sidebar %}
+    {% include 'side_bar.html' with page='patent'%}
+{% endblock sidebar %}
+
 {% block content %}
     <form class="form-block" action="{% url 'delete-whole-patent' patent.patent_slug %}" method="POST" enctype="multipart/form-data" autocomplete="off">
         {% csrf_token %}

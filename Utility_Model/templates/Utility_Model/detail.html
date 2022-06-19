@@ -8,16 +8,16 @@
 {% endblock css_files %}
 
 {% block page_title %}
-    {{application.patent_application_name}} - Patent
+    {{application.utility_model_application_name}} - Utility Model
 {% endblock page_title %}
 
 
 {% block sidebar %}
-    {% include 'side_bar.html' with page='patent'%}
+    {% include 'side_bar.html' with page='utility'%}
 {% endblock sidebar %}
 
 {% block content %}
-    <h1><a class="page-header" href="{% url 'patent-home' %}">Patent</a></h1>
+    <h1><a class="page-header" href="{% url 'utility-model-home' %}">Utility Model</a></h1>
 
     {% for message in messages %}
         <div class="alert alert-primary">
@@ -26,7 +26,7 @@
     {% endfor %}
 
     <div class="d-flex flex-column name-block">
-        <h2>{{ application.patent_application_name }}</h2>
+        <h2>{{ application.utility_model_application_name }}</h2>
         <h6>Date Added: {{ application.date_added }}</h6>
         <h6>Date Modified: {{ application.date_modified }}</h6>
     </div>
@@ -35,7 +35,7 @@
     <div class="remarks-block">
         <h2>Remarks</h2>
         <p>{{ application.remarks|linebreaks }}</p>
-        <a class="btn btn-info" href="{% url 'edit-remarks-patent' application.patent_slug %}">Edit</a>
+        <a class="btn btn-info" href="{% url 'edit-remarks-utility-model' application.utility_model_slug %}">Edit</a>
     </div>
 
     <div class="table-responsive files-table">
@@ -50,17 +50,17 @@
                 </tr>
 
                 <tbody>
-                    {% comment %} Patent Draft {% endcomment %}
+                    {% comment %} Draft {% endcomment %}
                     <tr>
-                        <td class="file-type">Patent Draft</td>
+                        <td class="file-type">Utility Model Draft</td>
 
-                        {% if documents.patent_draft.patent_draft_file.name != None %}
-                            <td><a href="{{ documents.patent_draft.patent_draft_file.url }}" target="_blank">{{ documents.patent_draft.patent_draft_file.name|file_name|truncatechars:30 }}</a></td>
-                            <td>{{ documents.patent_draft.date_added }}</td>
-                            <td>{{ documents.patent_draft.date_modified }}</td>
+                        {% if documents.draft_file.draft_file.name != None %}
+                            <td><a href="{{ documents.draft_file.draft_file.url }}" target="_blank">{{ documents.draft_file.draft_file.name|file_name|truncatechars:30 }}</a></td>
+                            <td>{{ documents.draft_file.date_added }}</td>
+                            <td>{{ documents.draft_file.date_modified }}</td>
                             <td>
                                 <span>
-                                    <a href="{% url 'edit-file-patent' application.patent_slug 'patent-draft-file' %}" class="btn btn-warning">Update</a>
+                                    <a href="{% url 'edit-file-utility-model' application.utility_model_slug 'draft-file' %}" class="btn btn-warning">Update</a>
                                 </span>
                             </td>
                         {% else %}
@@ -69,7 +69,7 @@
                             <td class="no-file"><i>No file</i></td>
                             <td class="no-file">
                                 <span>
-                                    <a href="{% url 'new-file-patent' application.patent_slug 'patent-draft-file' %}" class="btn btn-primary">Upload</a>
+                                    <a href="{% url 'new-file-utility-model' application.utility_model_slug 'draft-file' %}" class="btn btn-primary">Upload</a>
                                 </span>
                             </td>
                         {% endif %}
@@ -85,7 +85,7 @@
                             <td>{{ documents.invention_pictures.date_modified }}</td>
                             <td>
                                 <span>
-                                    <a href="{% url 'edit-file-patent' application.patent_slug 'invention-pictures-file' %}" class="btn btn-warning">Update</a>
+                                    <a href="{% url 'edit-file-utility-model' application.utility_model_slug 'invention-pictures-file' %}" class="btn btn-warning">Update</a>
                                 </span>
                             </td>
                         {% else %}
@@ -94,7 +94,7 @@
                             <td class="no-file"><i>No file</i></td>
                             <td class="no-file">
                                 <span>
-                                    <a href="{% url 'new-file-patent' application.patent_slug 'invention-pictures-file' %}" class="btn btn-primary">Upload</a>
+                                    <a href="{% url 'new-file-utility-model' application.utility_model_slug 'invention-pictures-file' %}" class="btn btn-primary">Upload</a>
                                 </span>
                             </td>
                         {% endif %}
@@ -110,7 +110,7 @@
                             <td>{{ documents.abstract_file.date_modified }}</td>
                             <td>
                                 <span>
-                                    <a href="{% url 'edit-file-patent' application.patent_slug 'abstract-file' %}" class="btn btn-warning">Update</a>
+                                    <a href="{% url 'edit-file-utility-model' application.utility_model_slug 'abstract-file' %}" class="btn btn-warning">Update</a>
                                 </span>
                             </td>
                         {% else %}
@@ -119,7 +119,7 @@
                             <td class="no-file"><i>No file</i></td>
                             <td class="no-file">
                                 <span>
-                                    <a href="{% url 'new-file-patent' application.patent_slug 'abstract-file' %}" class="btn btn-primary">Upload</a>
+                                    <a href="{% url 'new-file-utility-model' application.utility_model_slug 'abstract-file' %}" class="btn btn-primary">Upload</a>
                                 </span>
                             </td>
                         {% endif %}
@@ -135,7 +135,7 @@
                             <td>{{ documents.author_ids.date_modified }}</td>
                             <td>
                                 <span>
-                                    <a href="{% url 'edit-file-patent' application.patent_slug 'author-ids-file' %}" class="btn btn-warning">Update</a>
+                                    <a href="{% url 'edit-file-utility-model' application.utility_model_slug 'author-ids-file' %}" class="btn btn-warning">Update</a>
                                 </span>
                             </td>
                         {% else %}
@@ -144,7 +144,7 @@
                             <td class="no-file"><i>No file</i></td>
                             <td class="no-file">
                                 <span>
-                                    <a href="{% url 'new-file-patent' application.patent_slug 'author-ids-file' %}" class="btn btn-primary">Upload</a>
+                                    <a href="{% url 'new-file-utility-model' application.utility_model_slug 'author-ids-file' %}" class="btn btn-primary">Upload</a>
                                 </span>
                             </td>
                         {% endif %}
@@ -160,7 +160,7 @@
                             <td>{{ documents.memorandum_of_appointment.date_modified }}</td>
                             <td>
                                 <span>
-                                    <a href="{% url 'edit-file-patent' application.patent_slug 'memorandum-of-appointment-file' %}" class="btn btn-warning">Update</a>
+                                    <a href="{% url 'edit-file-utility-model' application.utility_model_slug 'memorandum-of-appointment-file' %}" class="btn btn-warning">Update</a>
                                 </span>
                             </td>
                         {% else %}
@@ -169,7 +169,7 @@
                             <td class="no-file"><i>No file</i></td>
                             <td class="no-file">
                                 <span>
-                                    <a href="{% url 'new-file-patent' application.patent_slug 'memorandum-of-appointment-file' %}" class="btn btn-primary">Upload</a>
+                                    <a href="{% url 'new-file-utility-model' application.utility_model_slug 'memorandum-of-appointment-file' %}" class="btn btn-primary">Upload</a>
                                 </span>
                             </td>
                         {% endif %}
@@ -180,6 +180,6 @@
         </table>
     </div>
 
-    <a href="{% url 'delete-whole-patent' application.patent_slug %}" class="btn btn-danger">Delete Entry</a>
+    <a href="{% url 'delete-whole-utility-model' application.utility_model_slug %}" class="btn btn-danger">Delete Entry</a>
     
 {% endblock content %}

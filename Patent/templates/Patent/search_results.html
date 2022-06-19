@@ -9,6 +9,10 @@
     Search Results - {{ query }}
 {% endblock page_title %}
 
+{% block sidebar %}
+    {% include 'side_bar.html' with page='patent'%}
+{% endblock sidebar %}
+
 {% block content %}
     <div class="search-results-block">
         <h1>Patent</h1>

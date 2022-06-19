@@ -10,6 +10,10 @@
     Copyright - Add New File
 {% endblock page_title %}
 
+{% block sidebar %}
+    {% include 'side_bar.html' with page='copyright' %}
+{% endblock sidebar %}
+
 {% block content %}
     <h1><a class="page-header" href="{% url 'copyright-home' %}">Copyright</a></h1>
 

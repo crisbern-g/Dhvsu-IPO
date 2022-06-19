@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="{% static 'Site/styles/index.css' %}">
 {% endblock css_files %}
 
+{% block sidebar %}
+    {% include 'side_bar.html' with page='home' %}
+{% endblock sidebar %}
+
 {% block content %}
     <div class="row row-cols-xl-2 row-cols-sm-1 row-cols-xs-1">
         {% comment %} Copyright {% endcomment %}
@@ -58,7 +62,7 @@
 
         {% comment %} Utility Model {% endcomment %}
         <div class="col">
-            <div class="card ip-card">
+            <div class="card ip-card" onclick="window.location='{% url 'utility-model-home' %}'">
                 <div class="card-body">
                   <h5 class="card-title">Special title treatment</h5>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>

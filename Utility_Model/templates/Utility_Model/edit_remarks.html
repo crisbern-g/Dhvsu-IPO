@@ -10,12 +10,12 @@
 {% endblock page_title %}
 
 {% block sidebar %}
-    {% include 'side_bar.html' with page='copyright' %}
+    {% include 'side_bar.html' with page='utility'%}
 {% endblock sidebar %}
 
 {% block content %}
-<h1>Copyright</h1>
-<form class="form-block" action="{% url 'edit-remarks' copyright.copyright_slug %}" method="POST" enctype="multipart/form-data" autocomplete="off">
+<h1>Utility Model</h1>
+<form class="form-block" action="{% url 'edit-remarks-utility-model' utility_model_application.utility_model_slug %}" method="POST" enctype="multipart/form-data" autocomplete="off">
     {% csrf_token %}
     
     {{ form.remarks.label_tag }}
@@ -24,6 +24,6 @@
     <br>
     
     <input class='btn btn-success' type="submit" value="Submit">
-    <a class="btn btn-secondary" href="{% url 'copyright-detail' copyright.copyright_slug %}">Back</a>
+    <a class="btn btn-secondary" href="{% url 'utility-model-detail' utility_model_application.utility_model_slug %}">Back</a>
 </form>
 {% endblock content %}

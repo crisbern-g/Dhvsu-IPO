@@ -10,34 +10,34 @@
 {% endblock page_title %}
 
 {% block sidebar %}
-    {% include 'side_bar.html' with page='copyright' %}
+    {% include 'side_bar.html' with page='utility'%}
 {% endblock sidebar %}
 
 {% block content %}
     <div class="search-results-block">
-        <h1>Copyright</h1>
+        <h1>Utility Model</h1>
         <hr>
         <h1>Results</h1>
 
-        <form class="d-flex align-items-start" method="get" action="{% url 'search-copyright' %}">
+        <form class="d-flex align-items-start" method="get" action="{% url 'search-utility-model' %}">
             <input name="search_query" id="searchbar" type="text" placeholder="Search...">
             <div>
                 <input class="btn btn-primary search-button" type="submit" value="Search">
-                <a class="btn btn-secondary" href="{% url 'copyright-home' %}">Return</a>
+                <a class="btn btn-secondary" href="{% url 'utility-model-home' %}">Return</a>
             </div>
             
         </form>
         
         <h5>Results for <b>"{{ query }}"</b></h5>
 
-        {% if copyrights %}
+        {% if utility_models %}
 
-            {% for copyright in copyrights %}
+            {% for utility_model in utility_models %}
                 <div class="search-result">
-                    <h4><a href="{{ copyright.copyright_slug }}">{{ copyright.copyright_application_name }}</a></h4>
-                    <h6>Date Added: {{ copyright.date_added }}</h6>
-                    <h6>Date Modified: {{ copyright.date_modified }}</h6>
-                    <p>{{ copyright.remarks|truncatechars:300 }}</p>
+                    <h4><a href="{{ utility_model.utility_model_slug }}">{{ utility_model.utility_model_application_name }}</a></h4>
+                    <h6>Date Added: {{ utility_model.date_added }}</h6>
+                    <h6>Date Modified: {{ utility_model.date_modified }}</h6>
+                    <p>{{ utility_model.remarks|truncatechars:300 }}</p>
                 </div>
             {% endfor %}
         {% else %}

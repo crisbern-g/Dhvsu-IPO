@@ -6,35 +6,35 @@
 {% endblock css_files %}
 
 {% block page_title %}
-    Add New Patent
+    Add New Utility Model
 {% endblock page_title %}
 
 {% block sidebar %}
-    {% include 'side_bar.html' with page='patent'%}
+    {% include 'side_bar.html' with page='utility'%}
 {% endblock sidebar %}
 
 {% block content %}
-    <h1>Patent</h1>
-    <form class="form-block" action="{% url 'add-patent' %}" method="POST" enctype="multipart/form-data" autocomplete="off">
+    <h1>Utility Model</h1>
+    <form class="form-block" action="{% url 'add-utility-model' %}" method="POST" enctype="multipart/form-data" autocomplete="off">
         {% csrf_token %}
         
-        <h3>Add new patent entry</h3>
+        <h3>Add new utility model entry</h3>
 
         <ul>
             <li>Name must be <b>unique</b> or not yet existing in the database. </li>
             <li>Remarks can be <b>empty</b>.</li>
         </ul>
 
-        {{ form.patent_application_name.label_tag }}
+        {{ form.utility_model_application_name.label_tag }}
 
-        {% if form.patent_application_name.errors %}
+        {% if form.utility_model_application_name.errors %}
             <div class="alert alert-danger">
-                {{ form.patent_application_name.errors}}
+                {{ form.utility_model_application_name.errors}}
             </div>
         {% endif %}
         
         <br>
-        {{ form.patent_application_name }}
+        {{ form.utility_model_application_name }}
         
         <br>
 

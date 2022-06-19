@@ -4,7 +4,7 @@ from django.core.validators import FileExtensionValidator
 from django.utils.crypto import get_random_string
 
 def custom_upload_path(instance, filename):
-    return f'patent/{instance.utility_model_application.utility_model_application_name}/{filename}'
+    return f'utility_model/{instance.utility_model_application.utility_model_application_name}/{filename}'
 
 
 class UtilityModelApplicationModel(models.Model):
@@ -27,7 +27,7 @@ class UtilityModelApplicationModel(models.Model):
 
 
 class DraftFileModel(models.Model):
-    patent_draft_file = models.FileField(upload_to=custom_upload_path, validators=[FileExtensionValidator(['pdf', 'zip'])])
+    draft_file = models.FileField(upload_to=custom_upload_path, validators=[FileExtensionValidator(['pdf', 'zip'])])
     utility_model_application = models.ForeignKey(UtilityModelApplicationModel, related_name='draft_file', on_delete=models.CASCADE, null=True)
     date_added = models.DateTimeField(auto_now_add=True, editable=False)
     date_modified = models.DateTimeField(auto_now=True)
