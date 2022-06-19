@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'Ip_Styles/add.css' %}">
+    <link rel="stylesheet" href="{% static 'Ip_Styles/detail.css' %}">
+{% endblock css_files %}
+
+{% block page_title %}
+    {{application.application_name}} - Industrial Model
+{% endblock page_title %}
+
+
+{% block sidebar %}
+    {% include 'side_bar.html' with page='industrial'%}
+{% endblock sidebar %}
+
+{% block content %}
+    <h1><a class="page-header" href="{% url 'industrial-design-home' %}">Industrial Design</a></h1>
+
+    {% for message in messages %}
+        <div class="alert alert-primary">
+            <h3>{{ message }}</h3>
+        </div>
+    {% endfor %}
+
+    <div class="d-flex flex-column name-block">
+        <h2>{{ application.application_name }}</h2>
+        <h6>Date Added: {{ application.date_added }}</h6>
+        <h6>Date Modified: {{ application.date_modified }}</h6>
+    </div>
+
+    {% comment %} Remarks {% endcomment %}
+    <div class="remarks-block">
+        <h2>Remarks</h2>
+        <p>{{ application.remarks|linebreaks }}</p>
+        <a class="btn btn-info" href="{% url 'edit-remarks-industrial-design' application.slug %}">Edit</a>
+    </div>
+
+    <div class="table-responsive files-table">
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th>File Type</th>
+                    <th>File</th>
+                    <th>Date Added</th>
+                    <th>Date Modified</th>
+                    <th>Actions</th>
+                </tr>
+
+                <tbody>
+                    {% comment %} Draft {% endcomment %}
+                    <tr>
+                        <td class="file-type">Industrial Design Draft</td>
+
+                        {% if documents.draft_file.draft_file.name != None %}
+                            <td><a href="{{ documents.draft_file.draft_file.url }}" target="_blank">{{ documents.draft_file.draft_file.name|file_name|truncatechars:30 }}</a></td>
+                            <td>{{ documents.draft_file.date_added }}</td>
+                            <td>{{ documents.draft_file.date_modified }}</td>
+                            <td>
+                                <span>
+                                    <a href="{% url 'edit-file-industrial-design' application.slug 'draft-file' %}" class="btn btn-warning">Update</a>
+                                </span>
+                            </td>
+                        {% else %}
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file">
+                                <span>
+                                    <a href="{% url 'new-file-industrial-design' application.slug 'draft-file' %}" class="btn btn-primary">Upload</a>
+                                </span>
+                            </td>
+                        {% endif %}
+                    </tr>
+
+                    {% comment %} Pictures of the Invention {% endcomment %}
+                    <tr>
+                        <td class="file-type">Pictures of the Invention</td>
+
+                        {% if documents.invention_pictures.invention_pictures_file.name != None %}
+                            <td><a href="{{ documents.invention_pictures.invention_pictures_file.url }}" target="_blank">{{ documents.invention_pictures.invention_pictures_file.name|file_name|truncatechars:30 }}</a></td>
+                            <td>{{ documents.invention_pictures.date_added }}</td>
+                            <td>{{ documents.invention_pictures.date_modified }}</td>
+                            <td>
+                                <span>
+                                    <a href="{% url 'edit-file-industrial-design' application.slug 'invention-pictures-file' %}" class="btn btn-warning">Update</a>
+                                </span>
+                            </td>
+                        {% else %}
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file">
+                                <span>
+                                    <a href="{% url 'new-file-industrial-design' application.slug 'invention-pictures-file' %}" class="btn btn-primary">Upload</a>
+                                </span>
+                            </td>
+                        {% endif %}
+                    </tr>
+
+                    {% comment %} Abstract {% endcomment %}
+                    <tr>
+                        <td class="file-type">Abstract</td>
+
+                        {% if documents.abstract_file.abstract_file.name != None %}
+                            <td><a href="{{ documents.abstract_file.abstract_file.url }}" target="_blank">{{ documents.abstract_file.abstract_file.name|file_name|truncatechars:30 }}</a></td>
+                            <td>{{ documents.abstract_file.date_added }}</td>
+                            <td>{{ documents.abstract_file.date_modified }}</td>
+                            <td>
+                                <span>
+                                    <a href="{% url 'edit-file-industrial-design' application.slug 'abstract-file' %}" class="btn btn-warning">Update</a>
+                                </span>
+                            </td>
+                        {% else %}
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file">
+                                <span>
+                                    <a href="{% url 'new-file-industrial-design' application.slug 'abstract-file' %}" class="btn btn-primary">Upload</a>
+                                </span>
+                            </td>
+                        {% endif %}
+                    </tr>
+
+                    {% comment %} Author IDs {% endcomment %}
+                    <tr>
+                        <td class="file-type">IDs of the Author</td>
+
+                        {% if documents.author_ids.author_ids_file.name != None %}
+                            <td><a href="{{ documents.author_ids.author_ids_file.url }}" target="_blank">{{ documents.author_ids.author_ids_file.name|file_name|truncatechars:30 }}</a></td>
+                            <td>{{ documents.author_ids.date_added }}</td>
+                            <td>{{ documents.author_ids.date_modified }}</td>
+                            <td>
+                                <span>
+                                    <a href="{% url 'edit-file-industrial-design' application.slug 'author-ids-file' %}" class="btn btn-warning">Update</a>
+                                </span>
+                            </td>
+                        {% else %}
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file">
+                                <span>
+                                    <a href="{% url 'new-file-industrial-design' application.slug 'author-ids-file' %}" class="btn btn-primary">Upload</a>
+                                </span>
+                            </td>
+                        {% endif %}
+                    </tr>
+
+                    {% comment %} Memorandum of Appointment {% endcomment %}
+                    <tr>
+                        <td class="file-type">Memorandum of Appointment</td>
+
+                        {% if documents.memorandum_of_appointment.memorandum_of_appointment_file.name != None %}
+                            <td><a href="{{ documents.memorandum_of_appointment.memorandum_of_appointment_file.url }}" target="_blank">{{ documents.memorandum_of_appointment.memorandum_of_appointment_file.name|file_name|truncatechars:30 }}</a></td>
+                            <td>{{ documents.memorandum_of_appointment.date_added }}</td>
+                            <td>{{ documents.memorandum_of_appointment.date_modified }}</td>
+                            <td>
+                                <span>
+                                    <a href="{% url 'edit-file-industrial-design' application.slug 'memorandum-of-appointment-file' %}" class="btn btn-warning">Update</a>
+                                </span>
+                            </td>
+                        {% else %}
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file"><i>No file</i></td>
+                            <td class="no-file">
+                                <span>
+                                    <a href="{% url 'new-file-industrial-design' application.slug 'memorandum-of-appointment-file' %}" class="btn btn-primary">Upload</a>
+                                </span>
+                            </td>
+                        {% endif %}
+                    </tr>
+
+                </tbody>
+            </thead>
+        </table>
+    </div>
+
+    <a href="{% url 'delete-whole-industrial-design' application.slug %}" class="btn btn-danger">Delete Entry</a>
+    
+{% endblock content %}

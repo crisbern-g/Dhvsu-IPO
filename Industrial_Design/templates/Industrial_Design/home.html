@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'Ip_Styles/home.css' %}">
+{% endblock css_files %}
+
+{% block page_title %}
+    Industrial Design
+{% endblock page_title %}
+
+{% block sidebar %}
+    {% include 'side_bar.html' with page='industrial'%}
+{% endblock sidebar %}
+
+{% block content %}
+    {% for message in messages %}
+        <div class="alert alert-warning notification">
+            <h5>{{ message }}</h5>
+        </div>
+    {% endfor %}
+
+    <div class="wrapper">
+
+        <h3>Industrial Design</h3>
+            
+
+        <form class="d-flex align-items-start" method="get" action="{% url 'search-industrial-design' %}">
+            <input name="search_query" id="searchbar" type="text" placeholder="Search...">
+            <input class="btn btn-primary search-button" type="submit" value="Search">
+        </form>
+
+        
+        <div>
+            <a href="{% url 'add-industrial-design' %}" class="btn btn-success">Add New Industrial Design</a>
+        </div>
+        
+        <br>
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Completed Files</th>
+                        <th>Missing Files</th>
+                        <th>Date Added</th>
+                        <th>Date Modified</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for application in industrial_designs %}
+                        <tr>
+                            <td class="td-name"><a href="{% url 'industrial-design-detail' application.slug %}">{{ application.application_name }}</a></td>
+                            <td class="table-complete-column">
+                                <ul>
+                                    {% if application.draft_file.first %}
+                                        <li>Industrial Design Draft</li>
+                                    {% endif %}
+        
+                                    {% if application.invention_pictures.first %}
+                                        <li>Pictures of the Invention</li>
+                                    {% endif %}
+
+                                    {% if application.abstract_file.first %}
+                                        <li>Abstract</li>
+                                    {% endif %}
+        
+                                    {% if application.author_ids.first %}
+                                        <li>IDs of the Authors</li>
+                                    {% endif %}
+        
+                                    {% if application.memorandum_of_appointment.first %}
+                                        <li>Memorandum of Appointment</li>
+                                    {% endif %}
+                                </ul>
+                            </td>
+
+                            <td class="table-incomplete-column">
+                                <ul>
+                                    {% if not application.draft_file.first %}
+                                        <li>Industrial Design Draft</li>
+                                    {% endif %}
+        
+                                    {% if not application.invention_pictures.first %}
+                                        <li>Pictures of the Invention</li>
+                                    {% endif %}
+
+                                    {% if not application.abstract_file.first %}
+                                        <li>Abstract</li>
+                                    {% endif %}
+        
+                                    {% if not application.author_ids.first %}
+                                        <li>IDs of the Authors</li>
+                                    {% endif %}
+        
+                                    {% if not application.memorandum_of_appointment.first %}
+                                        <li>Memorandum of Appointment</li>
+                                    {% endif %}
+                                </ul>
+                            </td>
+
+                            <td>{{ application.date_added | date:"SHORT_DATE_FORMAT"}}</td>
+                            <td>{{ application.date_modified | date:"SHORT_DATE_FORMAT" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+        
+            </table>
+        </div>
+        
+        {% comment %} Pagination {% endcomment %}
+        <nav aria-label="...">
+            <ul class="pagination">
+                
+                {% if industrial_designs.number > 1 %}
+                    <a class="page-link" href="?page=1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                {% endif %}
+                
+
+                {% if industrial_designs.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ industrial_designs.previous_page_number }}">Previous</a>
+                    </li>
+                {% endif %}
+                
+                
+                {% for num in industrial_designs.paginator.page_range %}
+
+                    {% if num == industrial_designs.number %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">{{ num }}</a>
+                        </li>
+                    {% elif num > industrial_designs.number|add:'-4' and num < industrial_designs.number|add:'4'%}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                
+                {% endfor %}
+                
+                {% if industrial_designs.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ industrial_designs.next_page_number }}">Next</a>
+                    </li>
+                {% endif %}
+                
+                
+                {% if industrial_designs.number < industrial_designs.paginator.num_pages %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ industrial_designs.paginator.num_pages }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+                
+            </ul>
+        </nav>
+    </div>
+{% endblock content %}

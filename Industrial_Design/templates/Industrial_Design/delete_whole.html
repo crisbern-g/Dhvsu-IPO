@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'Ip_Styles/delete_whole.css' %}">
+{% endblock css_files %}
+
+{% block sidebar %}
+    {% include 'side_bar.html' with page='industrial'%}
+{% endblock sidebar %}
+
+{% block content %}
+    <form class="form-block" action="{% url 'delete-whole-industrial-design' application.slug %}" method="POST" enctype="multipart/form-data" autocomplete="off">
+        {% csrf_token %}
+
+        <h1>WARNING</h1>
+        
+        <p>
+            You are about to delete an Industrial Design entry named <b>{{ application.application_name }}</b>. Associated files to this entry are as follows:
+        </p>
+
+        <ul>
+            {% if file.draft_file.draft_file.name %}
+                <li><b>{{ file.draft_file.draft_file.name|file_name }}</li></b>
+            {% endif %}
+            
+            {% if file.invention_pictures.invention_pictures_file.name %}
+                <li><b>{{ file.invention_pictures.invention_pictures_file.name|file_name }}</li></b>
+            {% endif %}
+            
+            {% if file.abstract_file.abstract_file.name %}
+                <li><b>{{ file.abstract_file.abstract_file.name|file_name }}</li></b>
+            {% endif %}
+            
+            {% if file.author_ids.author_ids_file.name %}
+                <li><b>{{ file.author_ids.author_ids_file.name|file_name }}</li></b>
+            {% endif %}
+            
+            {% if file.memorandum_of_appointment.memorandum_of_appointment_file.name %}
+                <li><b>{{ file.memorandum_of_appointment.memorandum_of_appointment_file.name|file_name }}</li></b>
+            {% endif %}
+        </ul>
+
+        <p>
+            By deleting this entry, the associated files will also be deleted. This process <b>CANNOT</b> be reversed. Please make sure that appropriate actions were taken before proceeding.
+        </p>
+
+        <div class="d-flex">
+            <input class='btn btn-danger action-button' type="submit" value="Delete">
+            <a class="btn btn-secondary action-button" href="{% url 'industrial-design-detail' application.slug %}">Go Back</a>
+        </div>
+    </form>
+{% endblock content %}

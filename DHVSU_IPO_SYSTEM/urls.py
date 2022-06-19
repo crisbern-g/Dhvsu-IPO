@@ -31,6 +31,9 @@ urlpatterns = [
     #Utility Model
     path('utility-model/', include('Utility_Model.urls')),
 
+    #Industrial Design
+    path('industrial-design', include('Industrial_Design.urls')),
+
     # Authentication
     path('authentication/', include('Authentication.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
