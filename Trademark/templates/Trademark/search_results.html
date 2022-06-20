@@ -10,7 +10,7 @@
 {% endblock page_title %}
 
 {% block sidebar %}
-    {% include 'side_bar.html' with page='utility'%}
+    {% include 'side_bar.html' with page='trademark'%}
 {% endblock sidebar %}
 
 {% block content %}
@@ -34,7 +34,7 @@
 
             {% for application in applications %}
                 <div class="search-result">
-                    <h4><a href="{{ application.application_slug }}">{{ application.application_name }}</a></h4>
+                    <h4><a href="{% url 'trademark-detail' application.slug %}">{{ application.application_name }}</a></h4>
                     <h6>Date Added: {{ application.date_added }}</h6>
                     <h6>Date Modified: {{ application.date_modified }}</h6>
                     <p>{{ application.remarks|truncatechars:300 }}</p>

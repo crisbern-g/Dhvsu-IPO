@@ -4,7 +4,7 @@ from django.views import View
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import TrademarkApplicationModel
-from .forms import AddTrademarkApplicationForm, EditRemarksForm
+from .forms import AddTrademarkApplicationForm, EditRemarksForm, ApplicationFormForm, MarkFileForm, AuthorIdsFileForm, MemorandumOfAppointmentFileForm
 
 # Create your views here.
 class TrademarkHome(LoginRequiredMixin, View):
@@ -60,8 +60,7 @@ class AddTrademarkView(LoginRequiredMixin, View):
             new_application = form.save(commit=False)
             new_application.save()
 
-            #return redirect('utility-model-detail', slug=new_application.slug)
-            return redirect('trademark-home')
+            return redirect('trademark-detail', slug=new_application.slug)
 
         context = {
             'form' : form
@@ -129,182 +128,172 @@ class EditRemarks(LoginRequiredMixin, View):
         return render(request, 'Trademark/edit_remarks.html', context)
 
 
-# class AddSingleFile(LoginRequiredMixin, View):
-#     login_url = 'login'
+class AddSingleFile(LoginRequiredMixin, View):
+    login_url = 'login'
 
-#     def get(self, request, slug, file_type):
-#         application = get_object_or_404(IndustrialDesignApplicationModel, slug=slug)
+    def get(self, request, slug, file_type):
+        application = get_object_or_404(TrademarkApplicationModel, slug=slug)
 
-#         draft_file = application.draft_file.first()
-#         invention_pictures = application.invention_pictures.first()
-#         abstract = application.abstract_file.first()
-#         author_ids = application.author_ids.first()
-#         memorandum_of_appointment = application.memorandum_of_appointment.first()
+        application_form = application.application_form.first()
+        mark = application.mark.first()
+        author_ids = application.author_ids.first()
+        memorandum_of_appointment = application.memorandum_of_appointment.first()
 
-#         files = {
-#             'draft-file' : draft_file,
-#             'invention-pictures-file' : invention_pictures,
-#             'abstract-file' : abstract,
-#             'author-ids-file': author_ids,
-#             'memorandum-of-appointment-file' : memorandum_of_appointment
-#         }
+        files = {
+            'application-form' : application_form,
+            'mark' : mark,
+            'author-ids-file': author_ids,
+            'memorandum-of-appointment-file' : memorandum_of_appointment
+        }
 
-#         forms = {
-#             'draft-file' : DraftFileForm,
-#             'invention-pictures-file': InventionPicturesFileForm,
-#             'abstract-file' :AbstractFileForm,
-#             'author-ids-file': AuthorIdsFileForm,
-#             'memorandum-of-appointment-file' : MemorandumOfAppointmentFileForm
-#         }
+        forms = {
+            'application-form' : ApplicationFormForm,
+            'mark': MarkFileForm,
+            'author-ids-file': AuthorIdsFileForm,
+            'memorandum-of-appointment-file' : MemorandumOfAppointmentFileForm
+        }
         
-#         form = forms[file_type]
-#         file = files[file_type]
+        form = forms[file_type]
+        file = files[file_type]
 
-#         if file is not None:
-#             return redirect('edit-file-industrial-design', slug=application.slug, file_type=file_type)
+        if file is not None:
+            return redirect('edit-file-trademark', slug=application.slug, file_type=file_type)
 
-#         context = {
-#             'application' : application,
-#             'form' : form,
-#             'file_type' : file_type
-#         }
+        context = {
+            'application' : application,
+            'form' : form,
+            'file_type' : file_type
+        }
         
-#         return render(request, 'Industrial_Design/new_file.html', context)
+        return render(request, 'Trademark/new_file.html', context)
 
 
-#     def post(self, request, slug, file_type):
-#         application = get_object_or_404(IndustrialDesignApplicationModel, slug=slug)
+    def post(self, request, slug, file_type):
+        application = get_object_or_404(TrademarkApplicationModel, slug=slug)
         
-#         forms = {
-#             'draft-file' : DraftFileForm(request.POST, request.FILES),
-#             'invention-pictures-file': InventionPicturesFileForm(request.POST, request.FILES),
-#             'abstract-file' :AbstractFileForm(request.POST, request.FILES),
-#             'author-ids-file': AuthorIdsFileForm(request.POST, request.FILES),
-#             'memorandum-of-appointment-file' : MemorandumOfAppointmentFileForm(request.POST, request.FILES),
-#         }
+        forms = {
+            'application-form' : ApplicationFormForm(request.POST, request.FILES),
+            'mark': MarkFileForm(request.POST, request.FILES),
+            'author-ids-file': AuthorIdsFileForm(request.POST, request.FILES),
+            'memorandum-of-appointment-file' : MemorandumOfAppointmentFileForm(request.POST, request.FILES)
+        }
 
-#         form = forms[file_type]
+        form = forms[file_type]
         
-#         if form.is_valid():
-#             new_file = form.save(commit=False)
-#             new_file.application = application
-#             application.date_modified = new_file.date_modified
-#             application.save()
-#             new_file.save()
+        if form.is_valid():
+            new_file = form.save(commit=False)
+            new_file.application = application
+            application.date_modified = new_file.date_modified
+            application.save()
+            new_file.save()
 
-#             messages.success(request, 'A new file has been added successfully.')
+            messages.success(request, 'A new file has been added successfully.')
 
-#             return redirect('industrial-design-detail', slug=application.slug)
+            return redirect('trademark-detail', slug=application.slug)
         
-#         context = {
-#             'application' : application,
-#             'form' : form,
-#             'file_type' : file_type
-#         }
+        context = {
+            'application' : application,
+            'form' : form,
+            'file_type' : file_type
+        }
         
-#         return render(request, 'Industrial_Design/new_file.html', context)
+        return render(request, 'Trademark/new_file.html', context)
 
 
-# class EditFile(LoginRequiredMixin, View):
-#     login_url = 'login'
+class EditFile(LoginRequiredMixin, View):
+    login_url = 'login'
 
-#     def get(self, request, slug, file_type):
-#         application = get_object_or_404(IndustrialDesignApplicationModel, slug=slug)
+    def get(self, request, slug, file_type):
+        application = get_object_or_404(TrademarkApplicationModel, slug=slug)
 
-#         draft_file = application.draft_file.first()
-#         invention_pictures = application.invention_pictures.first()
-#         abstract = application.abstract_file.first()
-#         author_ids = application.author_ids.first()
-#         memorandum_of_appointment = application.memorandum_of_appointment.first()
+        application_form = application.application_form.first()
+        mark = application.mark.first()
+        author_ids = application.author_ids.first()
+        memorandum_of_appointment = application.memorandum_of_appointment.first()
 
-#         files = {
-#             'draft-file' : draft_file,
-#             'invention-pictures-file' : invention_pictures,
-#             'abstract-file' : abstract,
-#             'author-ids-file': author_ids,
-#             'memorandum-of-appointment-file' : memorandum_of_appointment
-#         }
+        files = {
+            'application-form' : application_form,
+            'mark' : mark,
+            'author-ids-file': author_ids,
+            'memorandum-of-appointment-file' : memorandum_of_appointment
+        }
 
-#         forms = {
-#             'draft-file' : DraftFileForm(instance=draft_file),
-#             'invention-pictures-file': InventionPicturesFileForm(instance=invention_pictures),
-#             'abstract-file' :AbstractFileForm(instance=abstract),
-#             'author-ids-file': AuthorIdsFileForm(instance=author_ids),
-#             'memorandum-of-appointment-file' : MemorandumOfAppointmentFileForm(instance=memorandum_of_appointment)
-#         }
+        forms = {
+            'application-form' : ApplicationFormForm(instance=application_form),
+            'mark': MarkFileForm(instance=mark),
+            'author-ids-file': AuthorIdsFileForm(instance=author_ids),
+            'memorandum-of-appointment-file' : MemorandumOfAppointmentFileForm(instance=memorandum_of_appointment)
+        }
         
-#         form = forms[file_type]
-#         file = files[file_type]
+        form = forms[file_type]
+        file = files[file_type]
 
-#         if file == None:
-#             return redirect('new-file-industrial-design', slug=application.slug, file_type=file_type)
+        if file == None:
+            return redirect('new-file-trademark', slug=application.slug, file_type=file_type)
 
-#         context = {
-#             'application' : application,
-#             'form' : form,
-#             'file_type' : file_type,
-#             'file' : file
-#         }
+        context = {
+            'application' : application,
+            'form' : form,
+            'file_type' : file_type,
+            'file' : file
+        }
         
-#         return render(request, 'Industrial_Design/edit_file.html', context)
+        return render(request, 'Trademark/edit_file.html', context)
 
 
-#     def post(self, request, slug, file_type):
-#         application = get_object_or_404(IndustrialDesignApplicationModel, slug=slug)
+    def post(self, request, slug, file_type):
+        application = get_object_or_404(TrademarkApplicationModel, slug=slug)
 
-#         draft_file = application.draft_file.first()
-#         invention_pictures = application.invention_pictures.first()
-#         abstract = application.abstract_file.first()
-#         author_ids = application.author_ids.first()
-#         memorandum_of_appointment = application.memorandum_of_appointment.first()
+        application_form = application.application_form.first()
+        mark = application.mark.first()
+        author_ids = application.author_ids.first()
+        memorandum_of_appointment = application.memorandum_of_appointment.first()
 
-#         files = {
-#             'draft-file' : draft_file,
-#             'invention-pictures-file' : invention_pictures,
-#             'abstract-file' : abstract,
-#             'author-ids-file': author_ids,
-#             'memorandum-of-appointment-file' : memorandum_of_appointment
-#         }
+        files = {
+            'application-form' : application_form,
+            'mark' : mark,
+            'author-ids-file': author_ids,
+            'memorandum-of-appointment-file' : memorandum_of_appointment
+        }
 
-#         forms = {
-#             'draft-file' : DraftFileForm(request.POST, request.FILES, instance=draft_file),
-#             'invention-pictures-file': InventionPicturesFileForm(request.POST, request.FILES, instance=invention_pictures),
-#             'abstract-file' :AbstractFileForm(request.POST, request.FILES, instance=abstract),
-#             'author-ids-file': AuthorIdsFileForm(request.POST, request.FILES, instance=author_ids),
-#             'memorandum-of-appointment-file' : MemorandumOfAppointmentFileForm(request.POST, request.FILES, instance=memorandum_of_appointment)
-#         }
+        forms = {
+            'application-form' : ApplicationFormForm(request.POST, request.FILES, instance=application_form),
+            'mark': MarkFileForm(request.POST, request.FILES, instance=mark),
+            'author-ids-file': AuthorIdsFileForm(request.POST, request.FILES, instance=author_ids),
+            'memorandum-of-appointment-file' : MemorandumOfAppointmentFileForm(request.POST, request.FILES, instance=memorandum_of_appointment)
+        }
         
-#         form = forms[file_type]
-#         file = files[file_type]
+        form = forms[file_type]
+        file = files[file_type]
         
-#         if 'Submit' in request.POST:
-#             if form.is_valid():
-#                 new_file = form.save(commit=False)
+        if 'Submit' in request.POST:
+            if form.is_valid():
+                new_file = form.save(commit=False)
                 
-#                 application.date_modified = new_file.date_modified
-#                 application.save()
+                application.date_modified = new_file.date_modified
+                application.save()
 
-#                 new_file.save()
+                new_file.save()
 
-#                 messages.success(request, 'File has been succesfully updated.')
+                messages.success(request, 'File has been succesfully updated.')
 
-#                 return redirect('industrial-design-detail', slug=application.slug)
-#         elif 'Delete' in request.POST:
-#             file.delete()
+                return redirect('trademark-detail', slug=application.slug)
+        elif 'Delete' in request.POST:
+            file.delete()
 
-#             messages.success(request, 'File has been succesfully deleted.')
+            messages.success(request, 'File has been succesfully deleted.')
 
-#             return redirect('industrial-design-detail', slug=application.slug)
+            return redirect('trademark-detail', slug=application.slug)
 
 
-#         context = {
-#             'application' : application,
-#             'form' : form,
-#             'file_type' : file_type,
-#             'file' : file
-#         }
+        context = {
+            'application' : application,
+            'form' : form,
+            'file_type' : file_type,
+            'file' : file
+        }
         
-#         return render(request, 'Industrial_Design/edit_file.html', context)
+        return render(request, 'Trademark/edit_file.html', context)
 
 
 class DeleteWhole(LoginRequiredMixin, View):

@@ -1,5 +1,5 @@
 from django import forms
-from .models import TrademarkApplicationModel
+from .models import TrademarkApplicationModel, ApplicationFormModel, MarkFileModel, AuthorIdsFileModel, MemorandumOfAppointmentFileModel
 
 class AddTrademarkApplicationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -30,96 +30,77 @@ class EditRemarksForm(forms.ModelForm):
         }
 
 
-# class DraftFileForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.label_suffix = ""
+class ApplicationFormForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
 
 
-#     class Meta:
-#         model = DraftFileModel
-#         exclude =('application',)
+    class Meta:
+        model = ApplicationFormModel
+        exclude =('application',)
 
-#         labels = {
-#             'draft_file' : 'Industrial Design Draft',
-#         }
+        labels = {
+            'application_form_file' : 'Application Form',
+        }
 
-#         widgets = {
-#             'draft_file' : forms.FileInput(attrs={'accept' : '.pdf,.zip'})
-#         }
-
-
-# class InventionPicturesFileForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.label_suffix = ""
+        widgets = {
+            'application_form_file' : forms.FileInput(attrs={'accept' : '.pdf,.zip'})
+        }
 
 
-#     class Meta:
-#         model = InventionPicturesFileModel
-#         exclude =('application',)
-
-#         labels = {
-#             'invention_pictures_file' : 'Pictures of the Invention',
-#         }
-
-#         widgets = {
-#             'invention_pictures_file' : forms.FileInput(attrs={'accept' : '.pdf,.zip'})
-#         }
+class MarkFileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
 
 
-# class AbstractFileForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.label_suffix = ""
+    class Meta:
+        model = MarkFileModel
+        exclude =('application',)
+
+        labels = {
+            'mark_file' : 'Mark',
+        }
+
+        widgets = {
+            'mark_file' : forms.FileInput(attrs={'accept' : '.pdf,.zip'})
+        }
 
 
-#     class Meta:
-#         model = AbstractFileModel
-#         exclude =('application',)
-
-#         labels = {
-#             'abstract_file' : 'Abstract',
-#         }
-
-#         widgets = {
-#             'abstract_file' : forms.FileInput(attrs={'accept' : '.pdf,.zip'})
-#         }
+class AuthorIdsFileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
 
 
-# class AuthorIdsFileForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.label_suffix = ""
+    class Meta:
+        model = AuthorIdsFileModel
+        exclude =('application',)
+
+        labels = {
+            'author_ids_file' : 'IDs of the Authors',
+        }
+
+        widgets = {
+            'author_ids_file' : forms.FileInput(attrs={'accept' : '.pdf,.zip'})
+        }
 
 
-#     class Meta:
-#         model = AuthorIdsFileModel
-#         exclude =('application',)
-
-#         labels = {
-#             'author_ids_file' : 'IDs of the Authors',
-#         }
-
-#         widgets = {
-#             'author_ids_file' : forms.FileInput(attrs={'accept' : '.pdf,.zip'})
-#         }
+class MemorandumOfAppointmentFileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
 
 
-# class MemorandumOfAppointmentFileForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.label_suffix = ""
+    class Meta:
+        model = MemorandumOfAppointmentFileModel
+        exclude =('application',)
 
+        labels = {
+            'memorandum_of_appointment_file' : 'Memorandum of Appointment',
+        }
 
-#     class Meta:
-#         model = MemorandumOfAppointmentFileModel
-#         exclude =('application',)
-
-#         labels = {
-#             'memorandum_of_appointment_file' : 'Memorandum of Appointment',
-#         }
-
-#         widgets = {
-#             'memorandum_of_appointment_file' : forms.FileInput(attrs={'accept' : '.pdf,.zip'})
-#         }
+        widgets = {
+            'memorandum_of_appointment_file' : forms.FileInput(attrs={'accept' : '.pdf,.zip'})
+        }

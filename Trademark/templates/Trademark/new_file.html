@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 {% load static %}
 
@@ -7,28 +6,27 @@
 {% endblock css_files %}
 
 {% block page_title %}
-    Utility Model - Add New File
+    Trademark - Add New File
 {% endblock page_title %}
 
 {% block sidebar %}
-    {% include 'side_bar.html' with page='utility'%}
+    {% include 'side_bar.html' with page='trademark'%}
 {% endblock sidebar %}
 
 {% block content %}
-    <h1><a class="page-header" href="{% url 'utility-model-home' %}">Utility Model</a></h1>
+    <h1><a class="page-header" href="{% url 'trademark-home' %}">Trademark</a></h1>
 
     <div class="d-flex justify-content-between align-items-center name-block">
-        <h2>{{ utility_model.utility_model_application_name }}</h2>
-        <h6>Date Added: {{ utility_model.date_added }}</h6>
-        <h6>Date Modified: {{ utility_model.date_modified }}</h6>
+        <h2>{{ application.application_name }}</h2>
+        <h6>Date Added: {{ application.date_added }}</h6>
+        <h6>Date Modified: {{ application.date_modified }}</h6>
     </div>
 
-    <form class="form-block" action="{% url 'new-file-utility-model' utility_model.utility_model_slug file_type %}" method="POST" enctype="multipart/form-data" autocomplete="off">
+    <form class="form-block" action="{% url 'new-file-trademark' application.slug file_type %}" method="POST" enctype="multipart/form-data" autocomplete="off">
         {% csrf_token %}
         <h2>
-            {{ form.draft_file.label_tag }}
-            {{ form.invention_pictures_file.label_tag }}
-            {{ form.abstract_file.label_tag }}
+            {{ form.application_form_file.label_tag }}
+            {{ form.mark_file.label_tag }}
             {{ form.author_ids_file.label_tag }}
             {{ form.memorandum_of_appointment_file.label_tag }}
         </h2>
@@ -40,12 +38,12 @@
             </ul>
         </div>
 
-        {% if form.draft_file.errors  or form.invention_pictures_file.errors or form.abstract_file.errors or form.author_ids_file.errors or form.memorandum_of_appointment_file.errors %}
+        {% if form.application_form_file.errors or form.mark_file.errors or form.author_ids_file.errors or form.memorandum_of_appointment_file.errors %}
             <br>
 
             <div class="alert alert-danger">
-                {{ form.draft_file.errors }}
-                {{ form.invention_pictures_file.errors  }}
+                {{ form.application_form_file.errors }}
+                {{ form.mark_file.errors  }}
                 {{ form.abstract_file.errors }}
                 {{ form.author_ids_file.errors }}
                 {{ form.memorandum_of_appointment_file.errors }}
@@ -53,9 +51,8 @@
         {% endif %}
         <br>
 
-        {{ form.draft_file}}
-        {{ form.invention_pictures_file }}
-        {{ form.abstract_file }}
+        {{ form.application_form_file}}
+        {{ form.mark_file }}
         {{ form.author_ids_file}}
         {{ form.memorandum_of_appointment_file}}
         
@@ -64,7 +61,7 @@
         
         <div class="d-flex">
             <input class='btn btn-success action-button' type="submit" value="Submit">
-            <a class="btn btn-secondary action-button" href="{% url 'utility-model-detail' utility_model.utility_model_slug %}">Go Back</a>
+            <a class="btn btn-secondary action-button" href="{% url 'trademark-detail' application.slug %}">Go Back</a>
         </div>
         
     </form>

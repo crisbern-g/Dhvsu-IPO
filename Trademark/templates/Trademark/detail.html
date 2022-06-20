@@ -13,11 +13,11 @@
 
 
 {% block sidebar %}
-    {% include 'side_bar.html' with page='utility'%}
+    {% include 'side_bar.html' with page='trademark'%}
 {% endblock sidebar %}
 
 {% block content %}
-    <h1><a class="page-header" href="{% url 'utility-model-home' %}">Trademark</a></h1>
+    <h1><a class="page-header" href="{% url 'trademark-home' %}">Trademark</a></h1>
 
     {% for message in messages %}
         <div class="alert alert-primary">
@@ -60,7 +60,7 @@
                             <td>{{ documents.application_form.date_modified }}</td>
                             <td>
                                 <span>
-                                    <a href="" class="btn btn-warning">Update</a>
+                                    <a href="{% url 'edit-file-trademark' application.slug 'application-form' %}" class="btn btn-warning">Update</a>
                                 </span>
                             </td>
                         {% else %}
@@ -69,7 +69,7 @@
                             <td class="no-file"><i>No file</i></td>
                             <td class="no-file">
                                 <span>
-                                    <a href="" class="btn btn-primary">Upload</a>
+                                    <a href="{% url 'new-file-trademark' application.slug 'application-form' %}" class="btn btn-primary">Upload</a>
                                 </span>
                             </td>
                         {% endif %}
@@ -85,7 +85,7 @@
                             <td>{{ documents.mark.date_modified }}</td>
                             <td>
                                 <span>
-                                    <a href="" class="btn btn-warning">Update</a>
+                                    <a href="{% url 'edit-file-trademark' application.slug 'mark' %}" class="btn btn-warning">Update</a>
                                 </span>
                             </td>
                         {% else %}
@@ -94,7 +94,7 @@
                             <td class="no-file"><i>No file</i></td>
                             <td class="no-file">
                                 <span>
-                                    <a href="" class="btn btn-primary">Upload</a>
+                                    <a href="{% url 'new-file-trademark' application.slug 'mark' %}" class="btn btn-primary">Upload</a>
                                 </span>
                             </td>
                         {% endif %}
@@ -110,7 +110,7 @@
                             <td>{{ documents.author_ids.date_modified }}</td>
                             <td>
                                 <span>
-                                    <a href="" class="btn btn-warning">Update</a>
+                                    <a href="{% url 'edit-file-trademark' application.slug 'author-ids-file' %}" class="btn btn-warning">Update</a>
                                 </span>
                             </td>
                         {% else %}
@@ -119,7 +119,7 @@
                             <td class="no-file"><i>No file</i></td>
                             <td class="no-file">
                                 <span>
-                                    <a href="" class="btn btn-primary">Upload</a>
+                                    <a href="{% url 'new-file-trademark' application.slug 'author-ids-file' %}" class="btn btn-primary">Upload</a>
                                 </span>
                             </td>
                         {% endif %}
@@ -135,7 +135,7 @@
                             <td>{{ documents.memorandum_of_appointment.date_modified }}</td>
                             <td>
                                 <span>
-                                    <a href="" class="btn btn-warning">Update</a>
+                                    <a href="{% url 'edit-file-trademark' application.slug 'memorandum-of-appointment-file' %}" class="btn btn-warning">Update</a>
                                 </span>
                             </td>
                         {% else %}
@@ -144,7 +144,7 @@
                             <td class="no-file"><i>No file</i></td>
                             <td class="no-file">
                                 <span>
-                                    <a href="" class="btn btn-primary">Upload</a>
+                                    <a href="{% url 'new-file-trademark' application.slug 'memorandum-of-appointment-file' %}" class="btn btn-primary">Upload</a>
                                 </span>
                             </td>
                         {% endif %}
