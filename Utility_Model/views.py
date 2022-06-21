@@ -5,13 +5,14 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import UtilityModelApplicationModel
 from .forms import AddUtilityModelForm, EditRemarksForm, DraftFileForm, InventionPicturesFileForm, AbstractFileForm, AuthorIdsFileForm, MemorandumOfAppointmentFileForm
+from django.db.models.functions import Lower
 
 # Create your views here.
 class UtilityModelHome(LoginRequiredMixin, View):
     login_url = 'login'
 
     def get(self, request):
-        utility_model_applications = UtilityModelApplicationModel.objects.all()
+        utility_model_applications = UtilityModelApplicationModel.objects.all().order_by(Lower('utility_model_application_name'))
 
         table_page = Paginator(utility_model_applications, 20)
         current_page = request.GET.get('page')

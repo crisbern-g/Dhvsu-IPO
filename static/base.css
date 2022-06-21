@@ -5,6 +5,7 @@
 .sidebar{
     background-color: white;
     border-radius: 10px;
+    border: solid 1px rgb(211, 211, 211);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     margin: 10px;
 }
@@ -98,6 +99,7 @@
 }
 
 .page-footer{
-    background-color: #D1B000;
+    background-color: #1f0952;
+    color: white;
     margin-top: 10px;
 }

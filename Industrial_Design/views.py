@@ -5,13 +5,14 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import IndustrialDesignApplicationModel
 from .forms import AddIndustrialDesignForm, EditRemarksForm, DraftFileForm, InventionPicturesFileForm, AbstractFileForm, AuthorIdsFileForm, MemorandumOfAppointmentFileForm
+from django.db.models.functions import Lower
 
 # Create your views here.
 class IndustrialDesignHome(LoginRequiredMixin, View):
     login_url = 'login'
 
     def get(self, request):
-        applications = IndustrialDesignApplicationModel.objects.all()
+        applications = IndustrialDesignApplicationModel.objects.all().order_by(Lower('application_name'))
 
         table_page = Paginator(applications, 20)
         current_page = request.GET.get('page')

@@ -5,14 +5,14 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CopyRightApplicationModel
 from .forms import AddCopyrightForm, AddCopyrightApplicationFileForm, AddDeedOfAssignmentFileForm, ElectronicCopyFileForm, AuthorIdsFileForm, MemorandumOfAppointmentFileForm, CertificateOfRegistrationFileForm, EditRemarksForm
-
+from django.db.models.functions import Lower
 
 # Create your views here.
 class CopyrightHome(LoginRequiredMixin, View):
     login_url='login'
 
     def get(self, request):
-        copyright_applications = CopyRightApplicationModel.objects.all()
+        copyright_applications = CopyRightApplicationModel.objects.all().order_by(Lower('copyright_application_name'))
 
         table_page = Paginator(copyright_applications, 10)
         current_page = request.GET.get('page')
