@@ -37,6 +37,9 @@ urlpatterns = [
     #Trademark
     path('trademark/', include('Trademark.urls')),
 
+    #ISSN
+    path('issn/', include('ISSN.urls')),
+
     # Authentication
     path('authentication/', include('Authentication.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

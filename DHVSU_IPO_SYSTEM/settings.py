@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'Utility_Model',
     'Industrial_Design',
     'Trademark',
+    'ISSN',
     'Authentication',
 ]
 

@@ -10,20 +10,20 @@
 {% endblock page_title %}
 
 {% block sidebar %}
-    {% include 'side_bar.html' with page='industrial'%}
+    {% include 'side_bar.html' with page='issn'%}
 {% endblock sidebar %}
 
 {% block content %}
     <div class="search-results-block">
-        <h1>Industrial Design</h1>
+        <h1>ISSN</h1>
         <hr>
         <h1>Results</h1>
 
-        <form class="d-flex align-items-start" method="get" action="{% url 'search-industrial-design' %}">
+        <form class="d-flex align-items-start" method="get" action="{% url 'search-issn' %}">
             <input name="search_query" id="searchbar" type="text" placeholder="Search...">
             <div>
                 <input class="btn btn-primary search-button" type="submit" value="Search">
-                <a class="btn btn-secondary" href="{% url 'industrial-design-home' %}">Return</a>
+                <a class="btn btn-secondary" href="{% url 'issn-home' %}">Return</a>
             </div>
             
         </form>
@@ -34,7 +34,7 @@
 
             {% for application in applications %}
                 <div class="search-result">
-                    <h4><a href="{% url 'industrial-design-detail' application.slug %}">{{ application.application_name }}</a></h4>
+                    <h4><a href="{% url 'issn-detail' application.slug %}">{{ application.application_name }}</a></h4>
                     <h6>Date Added: {{ application.date_added }}</h6>
                     <h6>Date Modified: {{ application.date_modified }}</h6>
                     <p>{{ application.remarks|truncatechars:300 }}</p>

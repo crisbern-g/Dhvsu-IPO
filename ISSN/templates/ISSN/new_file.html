@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'Ip_Styles/new_file.css' %}">
+{% endblock css_files %}
+
+{% block page_title %}
+    ISSN - Add New File
+{% endblock page_title %}
+
+{% block sidebar %}
+    {% include 'side_bar.html' with page='issn'%}
+{% endblock sidebar %}
+
+{% block content %}
+    <h1><a class="page-header" href="{% url 'issn-home' %}">ISSN</a></h1>
+
+    <div class="d-flex justify-content-between align-items-center name-block">
+        <h2>{{ application.application_name }}</h2>
+        <h6>Date Added: {{ application.date_added }}</h6>
+        <h6>Date Modified: {{ application.date_modified }}</h6>
+    </div>
+
+    <form class="form-block" action="{% url 'new-file-issn' application.slug file_type %}" method="POST" enctype="multipart/form-data" autocomplete="off">
+        {% csrf_token %}
+        <h2>
+            {{ form.journal_file.label_tag }}
+            {{ form.editorial_file.label_tag }}
+            {{ form.author_ids_file.label_tag }}
+            {{ form.memorandum_of_appointment_file.label_tag }}
+        </h2>
+
+        <div>
+            <ul>
+                <li>Allowed file formats are <b>.pdf</b> and <b>.zip</b>.</li>
+                <li>Click <b>Submit</b> to upload selected file</li>
+            </ul>
+        </div>
+
+        {% if form.journal_file.errors or form.editorial_file.errors or form.author_ids_file.errors or form.memorandum_of_appointment_file.errors %}
+            <br>
+
+            <div class="alert alert-danger">
+                {{ form.journal_file.errors }}
+                {{ form.editorial_file.errors  }}
+                {{ form.abstract_file.errors }}
+                {{ form.author_ids_file.errors }}
+                {{ form.memorandum_of_appointment_file.errors }}
+            </div>
+        {% endif %}
+        <br>
+
+        {{ form.journal_file}}
+        {{ form.editorial_file }}
+        {{ form.author_ids_file}}
+        {{ form.memorandum_of_appointment_file}}
+        
+        <br>
+        <br>
+        
+        <div class="d-flex">
+            <input class='btn btn-success action-button' type="submit" value="Submit">
+            <a class="btn btn-secondary action-button" href="{% url 'issn-detail' application.slug %}">Go Back</a>
+        </div>
+        
+    </form>
+{% endblock content %}
