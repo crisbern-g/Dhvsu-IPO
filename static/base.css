@@ -98,8 +98,12 @@
     text-decoration: none !important;
 }
 
+.main-content{
+    margin-bottom: 20px;
+}
+
 .page-footer{
     background-color: #1f0952;
     color: white;
-    margin-top: 10px;
+    margin-top: 100px;
 }

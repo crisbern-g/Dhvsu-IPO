@@ -14,7 +14,7 @@
     <title>{% block page_title %}{% endblock page_title %}</title>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     {% comment %} Navbar {% endcomment %}
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
@@ -40,7 +40,7 @@
         </div>
 
         {% comment %} main content {% endcomment %}
-        <div class="col col-lg-9 col-sm-12 col-xs-12">
+        <div class="col col-lg-9 col-sm-12 col-xs-12 main-content">
           {% block content %}{% endblock content %}
         </div>
 
@@ -49,7 +49,7 @@
     </div>
 
     {% comment %} Footer {% endcomment %}
-    <footer class="page-footer">
+    <footer class="page-footer mt-auto">
 
       <!-- Copyright -->
       <div class="text-center py-3">
