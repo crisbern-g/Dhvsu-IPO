@@ -19,12 +19,14 @@
         <div class="col">
             <div class="card ip-card" onclick="window.location='{% url 'copyright-home' %}'">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <img class="ip-logo" src="{% static 'copyright_logo.png' %}" alt="">
+                        <h1>Copyright</h1>
+                    </div>
                 </div>
 
                 <div class="card-footer-custom">
-                    <h3>Copyright</h3>
+                    <h4>{{ copyrights }} Entr{{ copyrights|pluralize:'y,ies' }}</h4>
                 </div>
 
             </div>
@@ -34,12 +36,14 @@
         <div class="col">
             <div class="card ip-card" onclick="window.location='{% url 'patent-home' %}'">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <img class="ip-logo" src="{% static 'patent_logo.png' %}" alt="">
+                        <h1>Patent</h1>
+                    </div>
                 </div>
 
                 <div class="card-footer-custom">
-                    <h3>Patent</h3>
+                    <h4>{{ patents }} Entr{{ patents|pluralize:'y,ies' }}</h4>
                 </div>
 
             </div>
@@ -49,12 +53,14 @@
         <div class="col">
             <div class="card ip-card" onclick="window.location='{% url 'industrial-design-home' %}'">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <img class="ip-logo" src="{% static 'industrial_logo.png' %}" alt="">
+                        <h1>Industrial Design</h1>
+                    </div>
                 </div>
 
                 <div class="card-footer-custom">
-                    <h3>Industrial Design</h3>
+                    <h4>{{ industrial_designs }} Entr{{ industrial_designs|pluralize:'y,ies' }}</h4>
                 </div>
 
             </div>
@@ -64,12 +70,14 @@
         <div class="col">
             <div class="card ip-card" onclick="window.location='{% url 'utility-model-home' %}'">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <img class="ip-logo" src="{% static 'utility_logo.png' %}" alt="">
+                        <h1>Utility Model</h1>
+                    </div>
                 </div>
 
                 <div class="card-footer-custom">
-                    <h3>Utility Model</h3>
+                    <h4>{{ utility_models }} Entr{{ utility_models|pluralize:'y,ies' }}</h4>
                 </div>
 
             </div>
@@ -79,12 +87,14 @@
         <div class="col">
             <div class="card ip-card" onclick="window.location='{% url 'trademark-home' %}'">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <img class="ip-logo" src="{% static 'trademark_logo.png' %}" alt="">
+                        <h1>Trademark</h1>
+                    </div>
                 </div>
 
                 <div class="card-footer-custom">
-                    <h3>Trademark</h3>
+                    <h4>{{ trademarks }} Entr{{ trademarks|pluralize:'y,ies' }}</h4>
                 </div>
 
             </div>
@@ -94,12 +104,14 @@
         <div class="col">
             <div class="card ip-card" onclick="window.location='{% url 'issn-home' %}'">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <img class="ip-logo" src="{% static 'issn_logo.png' %}" alt="">
+                        <h1>ISSN</h1>
+                    </div>
                 </div>
 
                 <div class="card-footer-custom">
-                    <h3>ISSN</h3>
+                    <h4>{{ issns }} Entr{{ issns|pluralize:'y,ies' }}</h4>
                 </div>
 
             </div>

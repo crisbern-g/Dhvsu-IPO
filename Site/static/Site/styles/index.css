@@ -1,8 +1,22 @@
+.card{
+    background-color: rgb(255, 255, 255) !important;
+    transition-property: background-color;
+    transition: 500ms;
+    border: solid 1px rgb(211, 211, 211);
+}
+
+.card:hover{
+    background-color: rgb(233, 251, 255) !important;
+    border: rgb(123, 233, 255) 1px solid;
+    transition-property: background-color, border;
+    transition: 500ms;
+}
+
 .card-footer-custom{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #2e1141;
+    background-color: #535353;
     color: white;
     border-bottom-left-radius: 10px !important;
     border-bottom-right-radius: 10px !important;
@@ -15,4 +29,11 @@
     padding-top: 40px;
     box-shadow: rgba(209, 209, 209, 0.959) 0px 3px 8px;
     cursor: pointer;
+}
+
+.ip-logo{
+    min-height: 100px;
+    min-width: 100px;
+    max-height: 100px;
+    max-width: 100px;
 }

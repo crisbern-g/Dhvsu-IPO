@@ -15,4 +15,20 @@ class IndexView(LoginRequiredMixin, View):
     login_url = 'login'
 
     def get(self, request):
-        return render(request, 'Site/index.html')
+        copyrights = CopyRightApplicationModel.objects.all().count()
+        patents = PatentApplicationModel.objects.all().count()
+        utility_models = UtilityModelApplicationModel.objects.all().count()
+        industrial_design = IndustrialDesignApplicationModel.objects.all().count()
+        trademarks = TrademarkApplicationModel.objects.all().count()
+        issns = IssnApplicationModel.objects.all().count()
+
+        context = {
+            'copyrights' : copyrights,
+            'patents' : patents,
+            'utility_models' : utility_models,
+            'industrial_designs' : industrial_design,
+            'trademarks' : trademarks,
+            'issns' : issns
+        }
+
+        return render(request, 'Site/index.html', context)
